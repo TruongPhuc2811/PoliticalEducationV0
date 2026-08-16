@@ -26,6 +26,7 @@
 | P0 UI prototype tests | Validated | Six prototype flows PASS on desktop and mobile Chromium (12/12); not final business E2E |
 | V0.3 System Design | Accepted | Architecture baseline with 14 module boundaries, ADR-004 server-session auth, `/api/v1`, ProblemDetail, storage/integration/runtime/security design; all OI preserved; V0.4 remains partially blocked |
 | V0.4 Database Design | Placeholder | Do not create final schema from placeholder |
+| V0.4 Blocking Decision Pack | Awaiting Project Owner Decision | 10 blocking OIs mapped to 10 owner-answerable `BD-V04-*` decisions; no OI resolved and V0.4 not started |
 | V0.5 UI Guideline | Accepted | Current UI/UX implementation baseline; candidate brand values and official organizational assets remain Pending and are not promoted to final branding |
 | V0.5 UI/UX Specification | Accepted — scope/index | References the Accepted normative baseline and records validated P0/pending boundaries without duplicating the guideline |
 | V0.6 Test & Acceptance | Placeholder | E2E skeleton prepared |
@@ -57,7 +58,7 @@
 
 ## Next recommended Codex task
 
-Resolve V0.4-blocking business decisions before final Database Design.
+Project Owner answers the V0.4 Blocking Business Decision Pack.
 
 ## Version gates
 

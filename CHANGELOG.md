@@ -1,5 +1,24 @@
 # CHANGELOG
 
+## 2026-08-16 — V0.4 Blocking Business Decision Pack
+
+Added:
+- Added `docs/decisions/V0.4-BLOCKING-BUSINESS-DECISIONS.md` with status `Awaiting Project Owner Decision`.
+- Mapped the exact V0.4-blocking inventory `OI-002`, `OI-006..OI-014` (excluding non-blocking IDs) to 10 stable `BD-V04-*` decisions.
+- Added source evidence, bounded options/trade-offs, conceptual downstream impact, dependency order, minimum decision set and Owner quick-answer template.
+
+Preserved:
+- No option is selected; every Owner decision remains `PENDING` and no `OI-*` is closed.
+- V0.1/V0.2 business behavior, V0.3 architecture decisions and the Technology Baseline are unchanged.
+- No application, API implementation, physical database design, migration or runtime configuration was created.
+
+Status:
+- Current gate remains `V0.3_SYSTEM_DESIGN_ACCEPTED`.
+- V0.4 remains not started; the next action is Project Owner response to the Decision Pack.
+
+Report:
+- `docs/reports/2026-08-16-V0.4-BLOCKING-DECISION-PACK.md`
+
 ## 2026-08-16 — V0.3 System Design Approval
 
 Reviewed/fixed:
