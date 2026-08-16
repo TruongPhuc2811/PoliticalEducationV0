@@ -1,5 +1,47 @@
 # CHANGELOG
 
+## 2026-08-16 — V0.5 UI Guideline Approval
+
+Reviewed/fixed:
+- Reviewed the actual guideline and scope/index against V0.2, Screen Catalog, P0 Wireframe, UI reference and P0 UI acceptance evidence.
+- Clarified one MEDIUM approval-gate ambiguity: Pending official branding, exact colors, font delivery, breakpoint naming and tablet refinement do not block acceptance of the implementation baseline.
+- Added an explicit distinction between document acceptance and candidate/Pending token or branding status.
+
+Accepted:
+- V0.5 UI Guideline is the current UI/UX implementation baseline for P0 maintenance and future P1 work.
+- V0.5 UI/UX Specification is the Accepted scope/index pointing to that normative baseline.
+- `OI-002`, `OI-005`, `OI-006`, `OI-007`, `OI-008`, `OI-009`, `OI-012`, `OI-013`, `OI-014` and `OI-015` remain open.
+
+Unchanged:
+- P0 React UI remains `Review Ready` with UI Reporting Acceptance `PASS`.
+- No application, API, database, dependency, CI or wireframe source was changed.
+
+Status:
+- Current gate is `V0.5_UI_GUIDELINE_ACCEPTED`.
+- Official organizational branding assets and exact identity colors remain Pending.
+
+Report:
+- `docs/reports/2026-08-16-V0.5-UI-GUIDELINE-APPROVAL.md`
+
+## 2026-08-16 — V0.5 UI Guideline Draft
+
+Added/changed:
+- Replaced the V0.5 UI Guideline placeholder with a Review Ready documentation baseline derived from the accepted P0 visual direction, Review Ready wireframe and UI reference.
+- Standardized the shared product identity and distinct User/Admin visual languages, semantic color roles, typography, spacing, layout, responsive, component/state, accessibility and resource-conscious UI rules.
+- Classified current brand values as candidates, breakpoints as implementation-derived and official organizational assets as pending project-owner approval.
+- Reduced the separate UI/UX Specification to a scope/index that points to the guideline and records validated P0 and pending boundaries.
+
+Preserved:
+- `OI-002`, `OI-005`, `OI-006`, `OI-007`, `OI-008`, `OI-009`, `OI-012`, `OI-013`, `OI-014` and `OI-015`; no business rule, API or database design was added.
+- P0 React UI remains `Review Ready` with UI Reporting Acceptance `PASS`; no frontend, backend, E2E, package, CI or wireframe source was changed.
+
+Status:
+- V0.5 UI Guideline is `Review Ready`, not project-owner approved branding.
+- Current gate is `V0.5_UI_GUIDELINE_REVIEW_READY`.
+
+Report:
+- `docs/reports/2026-08-16-V0.5-UI-GUIDELINE-DRAFT.md`
+
 ## 2026-08-16 — P0 UI Acceptance Review
 
 Fixed:

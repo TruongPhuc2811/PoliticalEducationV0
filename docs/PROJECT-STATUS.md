@@ -1,8 +1,8 @@
 # PROJECT STATUS
 
-**Project:** Hệ thống Giáo dục Chính trị  
-**Updated:** 2026-08-16  
-**Current gate:** `P0_UI_REVIEW_READY`
+**Project:** Hệ thống Giáo dục Chính trị
+**Updated:** 2026-08-16
+**Current gate:** `V0.5_UI_GUIDELINE_ACCEPTED`
 
 ## Milestones
 
@@ -26,7 +26,8 @@
 | P0 UI prototype tests | Validated | Six prototype flows PASS on desktop and mobile Chromium (12/12); not final business E2E |
 | V0.3 System Design | Placeholder | Do not treat as approved |
 | V0.4 Database Design | Placeholder | Do not create final schema from placeholder |
-| V0.5 UI/UX | Placeholder | UI reference already stored |
+| V0.5 UI Guideline | Accepted | Current UI/UX implementation baseline; candidate brand values and official organizational assets remain Pending and are not promoted to final branding |
+| V0.5 UI/UX Specification | Accepted — scope/index | References the Accepted normative baseline and records validated P0/pending boundaries without duplicating the guideline |
 | V0.6 Test & Acceptance | Placeholder | E2E skeleton prepared |
 | V1.0 Baseline | Placeholder | Not started |
 | Backend code shell | Validated | Maven Wrapper test/package PASS on Java 21 |
@@ -52,14 +53,15 @@
 - Quiz attempt/timeout/ranking policies and weekly-question lifecycle remain Open Issues before implementation.
 - Competition completion-source conflict and organization hierarchy remain blocking Open Issues.
 - Popular-content metric, upload limits and Office preview feasibility remain Open Issues.
+- Official organizational logo/assets and exact identity colors remain Pending despite guideline acceptance.
 
 ## Next recommended Codex task
 
-Prepare V0.5 UI Guideline draft from the accepted P0 visual direction and UI reference.
+Start V0.3 System Design for MVP backend/API/integration baseline.
 
 ## Version gates
 
 - Do not implement final DB schema before V0.4 is approved.
-- Do not claim final UI conformance before V0.5 is approved.
+- Do not claim official organizational branding or final visual identity from V0.5 baseline acceptance; candidate/Pending assets remain controlled decisions.
 - Do not claim E2E completion from the current shell smoke test.
 - `Review Ready` does not mean V0.2 is `Accepted`; blocking Open Issues must be decided before affected implementation.
