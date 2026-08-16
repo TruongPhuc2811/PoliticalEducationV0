@@ -1,0 +1,61 @@
+name: e2e-shell
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "frontend/**"
+      - "e2e/**"
+      - ".github/workflows/e2e.yml"
+
+jobs:
+  shell-e2e:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install frontend
+        working-directory: frontend
+        run: npm install
+
+      - name: Start frontend
+        working-directory: frontend
+        run: |
+          npm run dev -- --host 127.0.0.1 > /tmp/pes-frontend.log 2>&1 &
+          echo $! > /tmp/pes-frontend.pid
+
+      - name: Wait for frontend
+        run: |
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:5173/login > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/pes-frontend.log
+          exit 1
+
+      - name: Install E2E
+        working-directory: e2e
+        run: npm install
+
+      - name: Install Chromium
+        working-directory: e2e
+        run: npx playwright install --with-deps chromium
+
+      - name: Run shell E2E
+        working-directory: e2e
+        run: npm test
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: e2e/playwright-report/
+          if-no-files-found: ignore

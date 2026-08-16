@@ -1,0 +1,34 @@
+---
+description: React 19, TypeScript, Vite, routing, query state, form, validation, and frontend structure conventions.
+globs: "frontend/**/*.{ts,tsx,css,json,html}"
+alwaysApply: false
+---
+
+# Frontend Rule
+
+Stack:
+- React 19.
+- TypeScript strict.
+- Vite 8.
+- React Router.
+- TanStack Query v5 for server state.
+- React Hook Form + Zod for non-trivial forms.
+- Ant Design 6.
+- Plain CSS/CSS Modules as the default custom styling approach.
+
+Structure:
+- Organize by feature/domain, not only by component type.
+- Keep route/page composition in `app` / `pages`.
+- Keep reusable infrastructure in `shared`.
+- Keep business feature code in `features`.
+- Do not add Redux unless a concrete state requirement cannot be handled cleanly with React/TanStack Query/local state.
+- Do not add Axios by default; native `fetch` is sufficient until a requirement needs otherwise.
+- Do not add Tailwind unless UI guideline explicitly approves it.
+
+Behavior:
+- Never put secrets in Vite environment variables.
+- Handle loading, empty and error states.
+- Use semantic HTML and keyboard-accessible interactions.
+- Keep API models typed.
+- Avoid `any`; use `unknown` and narrow when needed.
+- Do not hardcode business data in production paths. Mock data must live behind an obvious mock/demo boundary.

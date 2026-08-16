@@ -1,0 +1,20 @@
+---
+description: Enforce Requirement ID traceability whenever implementing, changing, documenting, or testing business behavior.
+globs:
+alwaysApply: true
+---
+
+# Requirements and Traceability
+
+Before changing business behavior:
+
+1. Identify the governing Requirement ID in `docs/v0.1/BUSINESS-REQUIREMENTS.md`.
+2. Read its functional detail in `docs/v0.2/FUNCTIONAL-SPECIFICATION.md`.
+3. If UI is involved, find the Screen ID in `docs/v0.2/SCREEN-CATALOG.md`.
+4. If the requirement is ambiguous, stop only the dependent work and add/report an Open Issue.
+5. When an API/DB/Test artifact is created, update `docs/TRACEABILITY-MATRIX.md`.
+
+Do not:
+- Rename stable IDs casually.
+- Add a feature because it "seems useful".
+- Treat placeholder V0.3/V0.4/V0.5/V0.6 documents as approved designs.

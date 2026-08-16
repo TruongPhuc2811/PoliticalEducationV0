@@ -1,0 +1,16 @@
+---
+description: Apply repository Git and GitHub workflow conventions when working with branches, commits, issues, PR metadata, workflows, or release files.
+globs: ".github/**/*,CONTRIBUTING.md,CHANGELOG.md"
+alwaysApply: false
+---
+
+# Git / GitHub
+
+- `main` is the integration branch.
+- Use Requirement IDs in issue/branch/commit/PR context.
+- Prefer conventional commits.
+- Keep commits logically focused.
+- Never commit secrets or generated local credentials.
+- Do not push, open/merge/close PRs, force-push, delete remote branches, or create releases unless explicitly asked.
+- CI configuration must not use Docker or service containers.
+- GitHub Actions should use supported setup actions and external/preconfigured MySQL when DB integration is required.

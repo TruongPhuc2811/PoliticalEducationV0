@@ -1,0 +1,20 @@
+---
+description: Documentation versioning, requirement IDs, status, assumptions, open issues, and artifact consistency rules.
+globs: "docs/**/*.md,wireframes/**/*.md,AGENTS.md,README.md,CHANGELOG.md"
+alwaysApply: false
+---
+
+# Documentation Rule
+
+- Preserve document IDs and Requirement IDs.
+- Every versioned doc must state: version, date, status, dependencies.
+- Distinguish `Draft`, `Review Ready`, `Accepted`, and `Superseded`.
+- Do not silently fill unanswered business questions with assumptions.
+- Put unresolved facts in Open Issues.
+- Record architecture changes as ADRs.
+- When a requirement changes, update:
+  1. versioned source doc,
+  2. traceability matrix,
+  3. affected downstream artifact,
+  4. changelog.
+- Vietnamese is the default documentation language; technical names may remain English.

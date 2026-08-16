@@ -1,0 +1,24 @@
+---
+description: UI implementation and wireframe rules for the User Portal, Admin Portal, responsive behavior, and the provided UI visual reference.
+globs: "frontend/**/*.{ts,tsx,css},docs/v0.5/**/*.md,wireframes/**/*.{md,html}"
+alwaysApply: false
+---
+
+# UI / UX Rule
+
+Reference:
+- `docs/00-input/ui-reference/ui-reference-01.png`
+- `wireframes/WIREFRAME-SPEC.md`
+- `docs/v0.2/SCREEN-CATALOG.md`
+
+Principles:
+- The image reference communicates visual direction; do not clone it 1:1.
+- User Portal: content-first, visual, large module entry points, responsive.
+- Admin Portal: operational, sidebar/table/form/dashboard oriented.
+- Home must expose all 9 main modules.
+- Desktop target: clear 3-column module grid where space allows.
+- Mobile target: 1–2 columns depending on width.
+- Keep content hierarchy readable over decorative backgrounds.
+- Avoid excessive gradients, shadows, animation, or ornamental detail.
+- Do not invent a final design token system before `docs/v0.5/UI-GUIDELINE.md` is approved.
+- For the UI-report milestone, mock interactions are allowed only when clearly isolated from production data behavior.

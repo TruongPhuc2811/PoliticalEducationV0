@@ -1,0 +1,24 @@
+---
+description: Playwright end-to-end conventions for user journeys, selectors, fixtures, test data, and CI.
+globs: "e2e/**/*.{ts,json}"
+alwaysApply: false
+---
+
+# Playwright E2E Rule
+
+- Use Playwright + TypeScript.
+- Test business journeys, not every visual detail.
+- Prefer role/label/text/test-id selectors over brittle CSS/XPath selectors.
+- Use `data-testid` only where semantic selectors are insufficient.
+- Keep tests independent.
+- Never depend on production accounts/data.
+- Put reusable authenticated setup in fixtures when authentication is implemented.
+- Keep test data creation deterministic.
+- Capture traces/screenshots on failure.
+- Critical flows eventually include:
+  - registration/login,
+  - content publishing → user viewing,
+  - quiz creation → attempt → result,
+  - weekly question → grading,
+  - competition score/ranking.
+- During skeleton phase, smoke tests may cover navigation only and must be labeled as shell tests.

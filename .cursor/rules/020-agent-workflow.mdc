@@ -1,0 +1,42 @@
+---
+description: Task execution workflow for Codex/Cursor Agent when the user asks to continue a version, implement a Requirement ID, validate the skeleton, fix a bug, or complete a repository task.
+globs:
+alwaysApply: false
+---
+
+# Agent Execution Workflow
+
+For any repository-changing execution task:
+
+1. Read `AGENTS.md`.
+2. Read `docs/PROJECT-STATUS.md`.
+3. Read `docs/prompts/PROMPT-PRINCIPLES.md`.
+4. Read the relevant `.cursor/rules/*.mdc` and nearest nested `AGENTS.md`.
+5. Read enough source/docs/config to establish the current behavior from evidence.
+6. Identify Requirement ID(s) where business behavior is involved.
+7. Confirm the smallest coherent scope before editing.
+8. Make a minimal diff; do not refactor unrelated code.
+9. Evaluate only source-supported runtime/resource risks in the touched flow.
+10. Add/update relevant tests.
+11. Run the most appropriate available validation.
+12. Create a new execution report in `docs/reports/`.
+13. Update traceability/status/changelog only when the task requires and evidence supports it.
+14. Final chat output must be short; detailed audit belongs in the report.
+
+Do not ask for confirmation for routine safe local work.
+
+Stop/ask before:
+- destructive actions,
+- production data mutation,
+- remote GitHub mutation,
+- architecture changes,
+- major dependency additions,
+- scope expansion.
+
+If evidence does not support the initial hypothesis:
+- do not invent a root cause,
+- do not make speculative edits,
+- report the mismatch honestly.
+
+Never mark a task DONE merely because files were created.
+DONE requires applicable Definition of Done checks from `AGENTS.md` and the prompt Acceptance Criteria.

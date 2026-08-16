@@ -1,0 +1,46 @@
+name: Feature
+description: Implement a requirement-backed feature
+title: "[REQ-ID] "
+labels: ["type:feature"]
+body:
+  - type: input
+    id: requirement
+    attributes:
+      label: Requirement ID
+      description: Example USR-001, QUIZ-004, COMP-003
+      placeholder: QUIZ-004
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: What should be implemented?
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: Copy/reference the current approved criteria.
+    validations:
+      required: true
+
+  - type: input
+    id: screens
+    attributes:
+      label: Related Screen IDs
+      placeholder: SCR-QUIZ-003
+
+  - type: textarea
+    id: test
+    attributes:
+      label: Test expectation
+      description: Unit/integration/E2E expectation.
+
+  - type: textarea
+    id: blockers
+    attributes:
+      label: Dependencies / blockers

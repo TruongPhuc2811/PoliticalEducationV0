@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:mysql://${TEST_DB_HOST:127.0.0.1}:${TEST_DB_PORT:3306}/${TEST_DB_NAME:political_education_test}?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Ho_Chi_Minh
+    username: ${TEST_DB_USERNAME:pes_test}
+    password: ${TEST_DB_PASSWORD:change_me}
+  jpa:
+    hibernate:
+      ddl-auto: validate

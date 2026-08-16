@@ -1,0 +1,27 @@
+---
+description: Automated test, validation, regression, and quality rules across backend, frontend, and end-to-end tests.
+globs: "backend/src/test/**/*.java,frontend/**/*.{test,spec}.{ts,tsx},e2e/**/*.ts"
+alwaysApply: false
+---
+
+# Testing Rule
+
+Test the behavior that matters, not implementation trivia.
+
+Backend:
+- Unit tests for business rules.
+- Integration tests for persistence/API behavior where valuable.
+- Use dedicated MySQL test DB for MySQL-specific behavior.
+- No H2 substitution for compatibility-sensitive tests.
+- No Testcontainers.
+
+Frontend:
+- Prefer tests for validation/state/critical component behavior.
+- Do not duplicate Playwright scenarios with low-value component tests.
+
+Quality:
+- Tests must be deterministic.
+- No production data dependencies.
+- Seed/cleanup test data explicitly.
+- A bug fix should include a regression test when practical.
+- Do not weaken assertions just to make CI green.

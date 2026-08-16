@@ -1,0 +1,25 @@
+name: Documentation
+description: Create or update project documentation
+title: "[DOC] "
+labels: ["type:docs"]
+body:
+  - type: input
+    id: document
+    attributes:
+      label: Document / version
+      placeholder: V0.2 Functional Specification
+    validations:
+      required: true
+
+  - type: textarea
+    id: change
+    attributes:
+      label: Requested change
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Downstream impact
+      description: Traceability, screens, APIs, DB, tests.

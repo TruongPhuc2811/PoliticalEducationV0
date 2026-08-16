@@ -1,0 +1,18 @@
+---
+description: Core project constraints, technology baseline, scope boundaries, and source-of-truth order. Apply to every task in this repository.
+globs:
+alwaysApply: true
+---
+
+# Project Core Rule
+
+- Read `AGENTS.md` and `docs/PROJECT-STATUS.md` before modifying files.
+- This is a documentation-first, traceable system.
+- Use the locked stack in `AGENTS.md`.
+- Never use Docker, Docker Compose, or Testcontainers.
+- Do not change architecture or add major infrastructure without an accepted ADR.
+- Do not invent business rules. Missing business facts become Open Issues.
+- Preserve existing Requirement IDs.
+- Keep UI text Vietnamese; keep code identifiers primarily English.
+- Do not push/merge/force-push or mutate GitHub remotely unless explicitly asked.
+- Safe local edits, builds, typechecks, and tests are allowed when the user asks to implement/fix.

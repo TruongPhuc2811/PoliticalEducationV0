@@ -1,0 +1,20 @@
+---
+description: MySQL 8.4 and Flyway schema rules for migrations, JPA mapping, indexes, constraints, and database design docs.
+globs: "backend/src/main/resources/db/migration/**/*.sql,backend/**/*.java,docs/v0.4/**/*.md"
+alwaysApply: false
+---
+
+# Database Rule
+
+- MySQL 8.4 LTS is the database baseline.
+- Flyway owns schema changes.
+- Never use Hibernate `ddl-auto=update` for shared or production environments.
+- Production target is `ddl-auto=validate`.
+- Migration files are immutable after they are shared/applied; create a new migration for corrections.
+- Use `utf8mb4`.
+- Define PK/FK/unique constraints deliberately.
+- Add indexes based on real query/filter/sort requirements, not speculation.
+- Store files/media outside MySQL; DB stores metadata and storage references.
+- Avoid EAV/generalized JSON schemas for core business entities unless a requirement justifies them.
+- Do not create final tables before V0.4 design is approved unless the task is an explicitly approved bootstrap migration.
+- Never run destructive SQL against production.

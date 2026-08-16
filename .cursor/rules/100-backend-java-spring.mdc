@@ -1,0 +1,47 @@
+---
+description: Java 21 and Spring Boot modular-monolith conventions for backend code.
+globs: "backend/**/*.{java,xml,yml,yaml,properties}"
+alwaysApply: false
+---
+
+# Backend Rule
+
+Stack:
+- Java 21.
+- Spring Boot 4.1.x.
+- Spring MVC REST.
+- Spring Security.
+- Spring Data JPA.
+- Bean Validation.
+- Flyway.
+- MySQL.
+
+Architecture:
+- Package by business feature.
+- Each feature may evolve into `api`, `application`, `domain`, `infrastructure` packages.
+- Avoid a global `controller/service/repository` package structure.
+- Cross-feature calls should go through an application/public boundary, not direct repository access.
+- Keep controllers thin.
+- Keep domain/business decisions outside controllers.
+- Use DTOs at API boundaries; do not expose JPA entities as public API payloads.
+- Validate request DTOs.
+- Use transactions at application/service boundaries where required.
+- Prefer constructor injection.
+- Do not add Lombok unless explicitly approved.
+- Do not add MapStruct unless explicitly approved.
+- Do not add reactive/WebFlux APIs unless a requirement demands them.
+
+REST:
+- Prefix application endpoints with `/api`.
+- Use correct HTTP status codes.
+- Add OpenAPI annotations only where they add clarity; do not duplicate obvious schema metadata everywhere.
+- Never return stack traces to clients.
+
+Security:
+- No hardcoded users/passwords.
+- Never weaken production authentication for convenience.
+- Public endpoints must be deliberate and documented.
+
+Testing:
+- Unit-test business logic.
+- Integration tests must use a dedicated MySQL test database; no H2 substitution for database-specific behavior and no Testcontainers.

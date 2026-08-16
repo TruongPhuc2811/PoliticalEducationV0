@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hệ thống Giáo dục Chính trị — P0 Wireframe Review</title>
+<style>
+:root {
+  color-scheme: light;
+  --bg: #f4f4f2;
+  --panel: #ffffff;
+  --ink: #202020;
+  --muted: #666666;
+  --line: #b8b8b2;
+  --soft: #ecece8;
+  --strong: #303030;
+  --focus: #1559a6;
+  --notice: #fff8d9;
+  --danger: #7b2020;
+  --success: #185f37;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; min-width: 0; font: 16px/1.5 Arial, Helvetica, sans-serif; color: var(--ink); background: var(--bg); }
+button, input, select, textarea { font: inherit; }
+button, select, input, textarea { min-height: 42px; }
+button { cursor: pointer; }
+button:disabled { cursor: not-allowed; opacity: .58; }
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.site-header { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; padding: 10px 24px; border-bottom: 1px solid var(--line); background: var(--panel); }
+.brand { font-weight: 700; letter-spacing: .02em; }
+.prototype-label { color: var(--muted); font-size: .9rem; }
+.container { width: min(1240px, 100%); margin: 0 auto; padding: 20px 24px 40px; }
+.demo-nav { margin-bottom: 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
+.demo-nav summary { padding: 12px 14px; font-weight: 700; cursor: pointer; }
+.demo-nav__buttons { display: flex; gap: 8px; overflow-x: auto; padding: 0 14px 14px; }
+.demo-nav__buttons button { flex: 0 0 auto; }
+.screen[hidden] { display: none !important; }
+.screen-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+.screen-id { margin: 0 0 4px; color: var(--muted); font-size: .85rem; font-weight: 700; letter-spacing: .04em; }
+h1, h2, h3, p { margin-top: 0; }
+h1 { margin-bottom: 6px; font-size: clamp(1.55rem, 3vw, 2.15rem); }
+h2 { font-size: 1.25rem; }
+.muted { color: var(--muted); }
+.panel { border: 1px solid var(--line); border-radius: 12px; background: var(--panel); padding: 18px; }
+.auth-panel { width: min(480px, 100%); margin: 42px auto; }
+.field { display: grid; gap: 6px; margin-bottom: 14px; }
+.field label, .field-label { font-weight: 700; }
+input, select, textarea { width: 100%; padding: 9px 11px; border: 1px solid #8e8e88; border-radius: 7px; background: #fff; color: var(--ink); }
+textarea { min-height: 110px; resize: vertical; }
+.actions, .filter-row { display: flex; flex-wrap: wrap; align-items: end; gap: 10px; }
+.actions { margin-top: 16px; }
+.btn { min-height: 42px; border: 1px solid var(--strong); border-radius: 7px; padding: 9px 14px; background: #fff; color: var(--ink); }
+.btn--primary { background: var(--strong); color: #fff; }
+.btn--quiet { border-color: var(--line); background: var(--soft); }
+.btn--danger { border-color: var(--danger); color: var(--danger); }
+.btn--link { border: 0; padding-inline: 4px; background: transparent; color: #174f8a; text-decoration: underline; }
+.notice { margin: 14px 0; border-left: 4px solid #8b7410; background: var(--notice); padding: 10px 12px; }
+.notice--success { border-left-color: var(--success); background: #eaf6ef; }
+.notice--error { border-left-color: var(--danger); background: #faecec; }
+.notice[hidden] { display: none; }
+.banner { display: grid; min-height: 150px; place-items: center; margin-bottom: 18px; border: 2px dashed var(--line); border-radius: 14px; background: #fafaf8; padding: 20px; text-align: center; }
+.module-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.module-card { display: grid; min-height: 150px; align-content: space-between; gap: 16px; width: 100%; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); padding: 18px; color: var(--ink); text-align: left; }
+.module-card:not(:disabled):hover { background: #f9f9f6; }
+.module-number { display: grid; width: 42px; height: 42px; place-items: center; border: 2px solid var(--line); border-radius: 10px; color: var(--muted); font-weight: 700; }
+.tag { display: inline-flex; width: fit-content; border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; background: var(--soft); color: var(--muted); font-size: .8rem; font-weight: 700; }
+.two-column { display: grid; grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr); gap: 16px; }
+.highlight-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-top: 18px; }
+.list { margin: 0; padding: 0; list-style: none; }
+.list-item { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 14px; padding: 16px 0; border-bottom: 1px solid #ddddda; }
+.list-item:last-child { border-bottom: 0; }
+.thumb { display: grid; min-height: 72px; place-items: center; border: 1px dashed var(--line); border-radius: 8px; background: #fafaf8; color: var(--muted); font-size: .8rem; }
+.pagination { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+.breadcrumb { margin-bottom: 12px; color: var(--muted); }
+.media-placeholder { display: grid; min-height: 230px; place-items: center; border: 2px dashed var(--line); border-radius: 12px; background: #fafaf8; padding: 16px; color: var(--muted); text-align: center; }
+.quiz-grid { display: grid; grid-template-columns: minmax(0, 1fr) 270px; gap: 16px; }
+.quiz-meta { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+.answers { display: grid; gap: 9px; border: 0; padding: 0; margin: 14px 0; }
+.answer { display: flex; align-items: flex-start; gap: 10px; border: 1px solid var(--line); border-radius: 8px; padding: 11px; }
+.answer input { width: auto; min-height: auto; margin-top: 4px; }
+.question-nav { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; }
+.result-panel { display: grid; min-height: 340px; place-items: center; text-align: center; }
+.result-mark { display: grid; width: 132px; height: 132px; place-items: center; margin: 0 auto 16px; border: 3px solid var(--strong); border-radius: 50%; font-size: 1.45rem; font-weight: 700; }
+.table-wrap { max-width: 100%; overflow-x: auto; border: 1px solid var(--line); border-radius: 9px; background: #fff; }
+table { width: 100%; min-width: 640px; border-collapse: collapse; }
+th, td { padding: 11px 12px; border-bottom: 1px solid #ddddda; text-align: left; vertical-align: top; }
+th { background: var(--soft); }
+tr:last-child td { border-bottom: 0; }
+.admin-shell { display: grid; grid-template-columns: 230px minmax(0, 1fr); min-height: 620px; overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+.admin-sidebar { border-right: 1px solid var(--line); background: var(--soft); padding: 16px; }
+.admin-sidebar nav { display: grid; gap: 6px; }
+.admin-sidebar button { width: 100%; text-align: left; }
+.admin-main { min-width: 0; padding: 20px; }
+.admin-mobile-menu { display: none; margin-bottom: 14px; border: 1px solid var(--line); border-radius: 8px; padding: 9px; }
+.admin-mobile-menu summary { font-weight: 700; cursor: pointer; }
+.admin-mobile-menu nav { display: grid; gap: 6px; margin-top: 8px; }
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 16px 0; }
+.stat { min-height: 118px; border: 1px solid var(--line); border-radius: 10px; padding: 14px; background: #fafaf8; }
+.stat strong { display: block; margin-top: 10px; font-size: 1.55rem; }
+.dialog { width: min(620px, calc(100% - 28px)); max-height: calc(100vh - 28px); overflow: auto; border: 1px solid var(--line); border-radius: 12px; padding: 0; }
+.dialog::backdrop { background: rgba(0, 0, 0, .35); }
+.dialog__body { padding: 18px; }
+#toast { position: fixed; right: 18px; bottom: 18px; z-index: 50; max-width: min(420px, calc(100% - 36px)); border: 1px solid var(--strong); border-radius: 8px; background: var(--strong); color: #fff; padding: 11px 14px; }
+#toast[hidden] { display: none; }
+@media (max-width: 850px) {
+  .site-header { position: static; padding-inline: 16px; }
+  .container { padding-inline: 16px; }
+  .module-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .two-column, .highlight-grid, .quiz-grid { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .admin-shell { grid-template-columns: 1fr; }
+  .admin-sidebar { display: none; }
+  .admin-mobile-menu { display: block; }
+}
+@media (max-width: 480px) {
+  .site-header { align-items: flex-start; flex-direction: column; gap: 2px; }
+  .container { padding: 12px 12px 32px; }
+  .module-grid, .stats { grid-template-columns: 1fr; }
+  .screen-header, .quiz-meta { flex-direction: column; }
+  .list-item { grid-template-columns: 1fr; }
+  .actions > .btn, .filter-row > .btn { flex: 1 1 auto; }
+  .filter-row > .field { width: 100%; }
+  .admin-main { padding: 14px; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="brand">[NHẬN DIỆN] HỆ THỐNG GIÁO DỤC CHÍNH TRỊ</div>
+  <div class="prototype-label">P0 standalone wireframe · mock/placeholder only</div>
+</header>
+
+<main class="container" id="app">
+  <details class="demo-nav">
+    <summary>Điều hướng kiểm tra 12 màn hình P0</summary>
+    <nav class="demo-nav__buttons" aria-label="Điều hướng kiểm tra P0">
+      <button class="btn btn--quiet" type="button" data-target="screen-auth-login">Login</button>
+      <button class="btn btn--quiet" type="button" data-target="screen-auth-register">Register</button>
+      <button class="btn btn--quiet" type="button" data-target="screen-home">Home</button>
+      <button class="btn btn--quiet" type="button" data-target="screen-handbook-list">Handbook list</button>
+      <button class="btn btn--quiet" type="button" data-target="screen-handbook-detail">Handbook detail</button>
+      <button class="btn btn--quiet" type="button" data-target="screen-quiz-list">Quiz list</button>
+      <button class="btn btn--quiet" type="button" data-target="screen-quiz-attempt">Quiz attempt</button>
+      <button class="btn btn--quiet" type="button" data-target="screen-quiz-result">Quiz result</button>
+      <button class="btn btn--quiet" type="button" data-target="screen-competition-ranking">Competition</button>
+      <button class="btn btn--quiet" type="button" data-target="screen-admin-dashboard">Admin</button>
+      <button class="btn btn--quiet" type="button" data-target="screen-admin-questions">Questions</button>
+      <button class="btn btn--quiet" type="button" data-target="screen-admin-handbook">Admin handbook</button>
+    </nav>
+  </details>
+
+  <section class="screen" id="screen-auth-login" data-screen-id="SCR-AUTH-001">
+    <div class="auth-panel panel">
+      <p class="screen-id">SCR-AUTH-001 · UC-AUTH-001</p>
+      <h1 tabindex="-1">Đăng nhập</h1>
+      <p class="muted">Mock interaction — không gửi thông tin xác thực.</p>
+      <form id="login-form" novalidate>
+        <div class="field">
+          <label for="login-username">Tên đăng nhập</label>
+          <input id="login-username" name="username" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="login-password">Mật khẩu</label>
+          <input id="login-password" name="password" type="password" autocomplete="current-password" required>
+        </div>
+        <div class="notice notice--error" id="login-status" role="status" hidden></div>
+        <div class="actions">
+          <button class="btn btn--primary" type="submit">Đăng nhập (mock)</button>
+          <button class="btn btn--link" type="button" data-target="screen-auth-register">Đăng ký bằng mã giới thiệu</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-auth-register" data-screen-id="SCR-AUTH-002" hidden>
+    <div class="auth-panel panel">
+      <p class="screen-id">SCR-AUTH-002 · UC-AUTH-002</p>
+      <h1 tabindex="-1">Đăng ký bằng mã giới thiệu</h1>
+      <p class="notice">Invitation lifecycle pending <strong>OI-006</strong>: không giả định expiration, one-time, quota hoặc owner.</p>
+      <form id="register-form" novalidate>
+        <div class="field">
+          <label for="register-username">Tên đăng nhập</label>
+          <input id="register-username" name="username" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="register-password">Mật khẩu</label>
+          <input id="register-password" name="password" type="password" autocomplete="new-password" required>
+        </div>
+        <div class="field">
+          <label for="register-code">Mã giới thiệu</label>
+          <input id="register-code" name="invitationCode" required aria-describedby="invitation-help">
+          <span id="invitation-help" class="muted">Chỉ kiểm tra generic hợp lệ/không hợp lệ trong prototype.</span>
+        </div>
+        <div class="notice notice--error" id="register-status" role="status" hidden></div>
+        <div class="notice notice--success" id="register-success" role="status" hidden>
+          <strong>Đăng ký thành công (mock).</strong> Prototype không tạo tài khoản và không auto-login.
+        </div>
+        <div class="actions">
+          <button class="btn btn--primary" type="submit">Đăng ký (mock)</button>
+          <button class="btn" type="button" id="show-invalid-code">Mô phỏng mã không hợp lệ</button>
+          <button class="btn btn--link" type="button" data-target="screen-auth-login">Quay lại đăng nhập</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-home" data-screen-id="SCR-HOME-001" hidden>
+    <div class="screen-header">
+      <div>
+        <p class="screen-id">SCR-HOME-001 · UC-HOME-001</p>
+        <h1 tabindex="-1">Trang chủ 9 phân hệ</h1>
+      </div>
+      <button class="btn" type="button" data-target="screen-auth-login">Đăng xuất (mock)</button>
+    </div>
+    <div class="banner"><div><strong>BANNER / THÔNG BÁO QUAN TRỌNG</strong><br><span class="muted">Hierarchy placeholder — không khóa visual/branding.</span></div></div>
+    <div class="module-grid" aria-label="9 phân hệ chính">
+      <button class="module-card" type="button" data-module="Cẩm nang người lính" data-target="screen-handbook-list"><span class="module-number">01</span><strong>Cẩm nang người lính</strong><span class="tag">P0 · Mở</span></button>
+      <button class="module-card" type="button" data-module="Học tập nghị quyết" disabled><span class="module-number">02</span><strong>Học tập nghị quyết</strong><span class="tag">P1 detail</span></button>
+      <button class="module-card" type="button" data-module="Đọc báo và nghe tin" disabled><span class="module-number">03</span><strong>Đọc báo và nghe tin</strong><span class="tag">P1 detail</span></button>
+      <button class="module-card" type="button" data-module="Kho tàng âm nhạc" disabled><span class="module-number">04</span><strong>Kho tàng âm nhạc</strong><span class="tag">P1 detail</span></button>
+      <button class="module-card" type="button" data-module="Kiểm tra trắc nghiệm" data-target="screen-quiz-list"><span class="module-number">05</span><strong>Kiểm tra trắc nghiệm</strong><span class="tag">P0 · Mở</span></button>
+      <button class="module-card" type="button" data-module="Giáo dục chính trị" disabled><span class="module-number">06</span><strong>Giáo dục chính trị</strong><span class="tag">P1 detail</span></button>
+      <button class="module-card" type="button" data-module="Lời Bác Hồ dạy" disabled><span class="module-number">07</span><strong>Lời Bác Hồ dạy</strong><span class="tag">P1 detail</span></button>
+      <button class="module-card" type="button" data-module="Mỗi tuần một câu hỏi" disabled><span class="module-number">08</span><strong>Mỗi tuần một câu hỏi</strong><span class="tag">P1 detail</span></button>
+      <button class="module-card" type="button" data-module="Chấm điểm thi đua" data-target="screen-competition-ranking"><span class="module-number">09</span><strong>Chấm điểm thi đua</strong><span class="tag">P0 · Mở</span></button>
+    </div>
+    <div class="highlight-grid">
+      <article class="panel"><h2>Lời Bác Hồ dạy hôm nay</h2><p class="muted">Mock excerpt / empty-state region theo HCM-003. Không tạo nội dung thật.</p></article>
+      <article class="panel"><h2>Thi đua nổi bật</h2><p class="muted">Mock highlight only — pending OI-002/OI-012/OI-014.</p><button class="btn" type="button" data-target="screen-competition-ranking">Xem bảng xếp hạng</button></article>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-handbook-list" data-screen-id="SCR-HAN-002" hidden>
+    <div class="screen-header">
+      <div><p class="screen-id">SCR-HAN-002 · UC-HAN-001 · UC-HAN-003</p><h1 tabindex="-1">Cẩm nang người lính</h1></div>
+      <button class="btn" type="button" data-target="screen-home">Về Home</button>
+    </div>
+    <div class="two-column">
+      <div class="panel">
+        <form class="filter-row" id="handbook-search-form">
+          <div class="field" style="flex:1 1 260px;margin:0"><label for="handbook-search">Tìm trong Cẩm nang</label><input id="handbook-search" placeholder="Nhập từ khóa"></div>
+          <button class="btn btn--primary" type="submit">Tìm kiếm</button>
+          <button class="btn" type="button" id="handbook-reset">Đặt lại</button>
+        </form>
+        <p class="notice" id="handbook-state" role="status">Mock list có pagination; media chỉ dùng thumbnail.</p>
+        <ul class="list" id="handbook-items">
+          <li class="list-item" data-search-text="điều lệnh quản lý bộ đội"><div class="thumb">THUMBNAIL</div><div><h2>Điều lệnh quản lý bộ đội</h2><p class="muted">Mô tả bài viết mẫu, không phải dữ liệu production.</p><button class="btn" type="button" data-target="screen-handbook-detail">Xem bài</button></div></li>
+          <li class="list-item" data-search-text="chế độ trong ngày"><div class="thumb">THUMBNAIL</div><div><h2>Chế độ trong ngày</h2><p class="muted">Mô tả bài viết mẫu.</p><button class="btn" type="button" data-target="screen-handbook-detail">Xem bài</button></div></li>
+          <li class="list-item" data-search-text="kỹ năng xử lý tình huống"><div class="thumb">THUMBNAIL</div><div><h2>Kỹ năng xử lý tình huống</h2><p class="muted">Mô tả bài viết mẫu.</p><button class="btn" type="button" data-target="screen-handbook-detail">Xem bài</button></div></li>
+        </ul>
+        <nav class="pagination" aria-label="Phân trang Cẩm nang"><button class="btn" type="button" disabled>Trước</button><button class="btn btn--primary" type="button" aria-current="page">1</button><button class="btn" type="button" data-toast="Chuyển trang mock — không tải toàn bộ danh sách.">2</button><button class="btn" type="button" data-toast="Chuyển trang mock — không tải toàn bộ danh sách.">Sau</button></nav>
+      </div>
+      <aside class="panel"><h2>Danh mục</h2><div class="field"><label for="handbook-category">Chọn danh mục</label><select id="handbook-category"><option>Tất cả</option><option>Điều lệnh</option><option>Chế độ</option><option>Quy định</option><option>Pháp luật</option><option>Kỹ năng</option></select></div><p class="muted">Filter presentation only.</p></aside>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-handbook-detail" data-screen-id="SCR-HAN-003" hidden>
+    <div class="screen-header">
+      <div><p class="screen-id">SCR-HAN-003 · UC-HAN-002</p><h1 tabindex="-1">Chi tiết Cẩm nang</h1></div>
+      <div class="actions" style="margin:0"><button class="btn" type="button" data-target="screen-handbook-list">Quay lại danh sách</button><button class="btn" type="button" data-target="screen-home">Home</button></div>
+    </div>
+    <article class="panel">
+      <p class="breadcrumb">Cẩm nang / Điều lệnh</p>
+      <h2>Tiêu đề bài viết mẫu</h2>
+      <p class="muted">Metadata nội dung mẫu</p>
+      <div class="media-placeholder" id="handbook-media">THUMBNAIL / MEDIA PLACEHOLDER<br>Không preload hoặc autoplay.</div>
+      <div class="actions"><button class="btn" type="button" id="preview-media">Xem media (mock)</button><button class="btn" type="button" data-toast="Download fallback placeholder — không có file thật.">Tải tài liệu (mock)</button></div>
+      <p class="notice">Upload limit pending OI-005; Office preview feasibility pending OI-015.</p>
+      <h2>Nội dung</h2>
+      <p>Khối văn bản low-fidelity mô tả hierarchy đọc. Nội dung này không phải dữ liệu production.</p>
+    </article>
+  </section>
+
+  <section class="screen" id="screen-quiz-list" data-screen-id="SCR-QUIZ-001" hidden>
+    <div class="screen-header"><div><p class="screen-id">SCR-QUIZ-001 · UC-QUIZ-003</p><h1 tabindex="-1">Danh sách kỳ kiểm tra</h1></div><button class="btn" type="button" data-target="screen-home">Về Home</button></div>
+    <p class="notice">Attempt policy pending OI-007; timeout behavior pending OI-008. Không hiển thị số lần làm.</p>
+    <div class="module-grid">
+      <article class="panel"><span class="tag">Đang mở</span><h2 style="margin-top:12px">Kiểm tra nhận thức — mẫu</h2><p>20 câu · 20 phút · Điểm đạt 70%</p><button class="btn btn--primary" type="button" data-dialog-open="quiz-start-dialog">Bắt đầu (mock)</button></article>
+      <article class="panel"><span class="tag">Đang mở</span><h2 style="margin-top:12px">Kiểm tra chuyên đề — mẫu</h2><p>15 câu · 15 phút · Điểm đạt theo cấu hình</p><button class="btn" type="button" data-dialog-open="quiz-start-dialog">Bắt đầu (mock)</button></article>
+      <article class="panel"><span class="tag">Đã đóng</span><h2 style="margin-top:12px">Kỳ kiểm tra đã đóng</h2><p class="muted">Không thể bắt đầu.</p><button class="btn" type="button" disabled>Đã đóng</button></article>
+    </div>
+    <nav class="pagination" aria-label="Phân trang kỳ kiểm tra"><button class="btn" type="button" disabled>Trước</button><button class="btn btn--primary" type="button" aria-current="page">1</button><button class="btn" type="button" data-toast="Pagination mock — question bank không được preload.">Sau</button></nav>
+  </section>
+
+  <section class="screen" id="screen-quiz-attempt" data-screen-id="SCR-QUIZ-003" hidden>
+    <div class="screen-header"><div><p class="screen-id">SCR-QUIZ-003 · UC-QUIZ-004 · UC-QUIZ-005</p><h1 tabindex="-1">Làm bài kiểm tra</h1></div><button class="btn" type="button" data-target="screen-quiz-list">Quay lại danh sách</button></div>
+    <div class="quiz-grid">
+      <div class="panel">
+        <div class="quiz-meta"><strong>Câu 1 / 20</strong><strong>Thời gian cấu hình: 20:00</strong></div>
+        <p class="notice">Timer area only — behavior on timeout pending OI-008. Không countdown/auto-submit.</p>
+        <form id="quiz-form">
+          <fieldset class="answers"><legend class="field-label">Nội dung câu hỏi mock?</legend>
+            <label class="answer"><input type="radio" name="answer" value="a"> <span>A. Phương án mẫu A</span></label>
+            <label class="answer"><input type="radio" name="answer" value="b"> <span>B. Phương án mẫu B</span></label>
+            <label class="answer"><input type="radio" name="answer" value="c"> <span>C. Phương án mẫu C</span></label>
+            <label class="answer"><input type="radio" name="answer" value="d"> <span>D. Phương án mẫu D</span></label>
+          </fieldset>
+          <p class="muted" id="answer-status" role="status">Chưa chọn đáp án. Submit-unanswered policy pending OI-007.</p>
+          <div class="actions"><button class="btn" type="button" data-toast="Điều hướng câu mock.">Câu trước</button><button class="btn" type="button" data-toast="Điều hướng câu mock.">Câu sau</button><button class="btn btn--primary" type="button" data-dialog-open="quiz-submit-dialog">Nộp bài</button></div>
+        </form>
+      </div>
+      <aside class="panel"><h2>Danh sách câu</h2><div class="question-nav" aria-label="Điều hướng câu hỏi"><button class="btn btn--primary" type="button" aria-current="step">1</button><button class="btn" type="button" data-toast="Điều hướng câu mock.">2</button><button class="btn" type="button" data-toast="Điều hướng câu mock.">3</button><button class="btn" type="button" data-toast="Điều hướng câu mock.">4</button><button class="btn" type="button" data-toast="Điều hướng câu mock.">5</button><button class="btn" type="button" data-toast="Điều hướng câu mock.">6</button><button class="btn" type="button" data-toast="Điều hướng câu mock.">7</button><button class="btn" type="button" data-toast="Điều hướng câu mock.">8</button></div><p class="notice">Fixed/resume behavior pending OI-007. Prototype không random/preload bank.</p></aside>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-quiz-result" data-screen-id="SCR-QUIZ-004" hidden>
+    <div class="panel result-panel">
+      <div>
+        <p class="screen-id">SCR-QUIZ-004 · UC-QUIZ-005</p>
+        <h1 tabindex="-1">Kết quả kiểm tra</h1>
+        <div class="result-mark">ĐẠT</div>
+        <p><strong>Mock presentation state</strong> — baseline chỉ yêu cầu Đạt/Không đạt.</p>
+        <p class="notice">Không hiển thị raw score, ranking metric, attempt selection hoặc tie-breaker — pending OI-009. Competition contribution pending OI-002.</p>
+        <div class="actions"><button class="btn btn--primary" type="button" data-target="screen-quiz-list">Về danh sách kỳ</button><button class="btn" type="button" data-target="screen-home">Về Home</button><button class="btn" type="button" data-target="screen-competition-ranking">Xem thi đua P0</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-competition-ranking" data-screen-id="SCR-COMP-002" hidden>
+    <div class="screen-header"><div><p class="screen-id">SCR-COMP-002 · UC-COMP-002</p><h1 tabindex="-1">Bảng xếp hạng thi đua</h1></div><button class="btn" type="button" data-target="screen-home">Về Home</button></div>
+    <p class="notice"><strong>Mock UI data — business formula pending OI-002/OI-012/OI-014.</strong> Không coefficient, weight hoặc tie-break rule.</p>
+    <div class="panel">
+      <div class="filter-row">
+        <div class="field"><label for="ranking-scope">Phạm vi</label><select id="ranking-scope"><option>Cá nhân</option><option>Tiểu đội</option><option>Trung đội</option><option>Đại đội</option></select></div>
+        <div class="field"><label for="ranking-period">Chu kỳ</label><select id="ranking-period"><option>Tuần</option><option>Tháng</option><option>Năm</option></select></div>
+      </div>
+      <p class="muted" id="ranking-context" role="status">Đang hiển thị mock: Cá nhân · Tuần</p>
+      <div class="table-wrap" role="region" aria-label="Bảng xếp hạng có thể cuộn ngang" tabindex="0">
+        <table><thead><tr><th>Hạng</th><th>Đối tượng mẫu</th><th>Điểm placeholder</th><th>Đơn vị mẫu</th></tr></thead><tbody><tr><td>1</td><td>Người dùng mẫu 01</td><td>—</td><td>Đơn vị mẫu A</td></tr><tr><td>2</td><td>Người dùng mẫu 02</td><td>—</td><td>Đơn vị mẫu B</td></tr><tr><td>3</td><td>Người dùng mẫu 03</td><td>—</td><td>Đơn vị mẫu A</td></tr></tbody></table>
+      </div>
+      <nav class="pagination" aria-label="Phân trang bảng xếp hạng"><button class="btn" type="button" disabled>Trước</button><button class="btn btn--primary" type="button" aria-current="page">1</button><button class="btn" type="button" data-toast="Chuyển trang ranking mock.">Sau</button></nav>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-admin-dashboard" data-screen-id="SCR-ADM-001" hidden>
+    <div class="admin-shell">
+      <aside class="admin-sidebar"><h2>ADMIN P0</h2><nav aria-label="Admin P0"><button class="btn btn--primary" type="button" data-target="screen-admin-dashboard">Dashboard</button><button class="btn" type="button" data-target="screen-admin-questions">Ngân hàng câu hỏi</button><button class="btn" type="button" data-target="screen-admin-handbook">Cẩm nang</button><button class="btn" type="button" disabled>Module P1</button></nav></aside>
+      <div class="admin-main">
+        <details class="admin-mobile-menu"><summary>Menu Admin P0</summary><nav><button class="btn btn--primary" type="button" data-target="screen-admin-dashboard">Dashboard</button><button class="btn" type="button" data-target="screen-admin-questions">Ngân hàng câu hỏi</button><button class="btn" type="button" data-target="screen-admin-handbook">Cẩm nang</button><button class="btn" type="button" disabled>Module P1</button></nav></details>
+        <div class="screen-header"><div><p class="screen-id">SCR-ADM-001 · UC-REP-001</p><h1 tabindex="-1">Admin Dashboard</h1></div><button class="btn" type="button" data-target="screen-auth-login">Đăng xuất (mock)</button></div>
+        <p class="muted">Widget placeholder; không polling.</p>
+        <div class="stats"><article class="stat"><span>Tổng quân số</span><strong>—</strong><small>Data placeholder</small></article><article class="stat"><span>Điểm thi đua</span><strong>—</strong><small>Pending OI-002</small></article><article class="stat"><span>Xếp hạng</span><strong>—</strong><small>Pending OI-002/OI-014</small></article><article class="stat"><span>Nội dung phổ biến</span><strong>—</strong><small>Metric placeholder — pending OI-013</small></article></div>
+        <div class="highlight-grid"><article class="panel"><h2>Thi đua / xu hướng</h2><div class="media-placeholder">CHART PLACEHOLDER<br>Không tính formula.</div></article><article class="panel"><h2>Trạng thái widget</h2><p>Loading/empty/error được cô lập theo widget.</p><button class="btn" type="button" data-toast="Retry widget mock — không polling.">Retry mock</button></article></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-admin-questions" data-screen-id="SCR-ADM-008" hidden>
+    <div class="admin-shell">
+      <aside class="admin-sidebar"><h2>ADMIN P0</h2><nav aria-label="Admin P0"><button class="btn" type="button" data-target="screen-admin-dashboard">Dashboard</button><button class="btn btn--primary" type="button" data-target="screen-admin-questions">Ngân hàng câu hỏi</button><button class="btn" type="button" data-target="screen-admin-handbook">Cẩm nang</button></nav></aside>
+      <div class="admin-main">
+        <details class="admin-mobile-menu"><summary>Menu Admin P0</summary><nav><button class="btn" type="button" data-target="screen-admin-dashboard">Dashboard</button><button class="btn btn--primary" type="button" data-target="screen-admin-questions">Ngân hàng câu hỏi</button><button class="btn" type="button" data-target="screen-admin-handbook">Cẩm nang</button></nav></details>
+        <div class="screen-header"><div><p class="screen-id">SCR-ADM-008 · UC-QUIZ-001</p><h1 tabindex="-1">Ngân hàng câu hỏi</h1></div><button class="btn btn--primary" type="button" data-dialog-open="question-dialog">+ Thêm câu hỏi</button></div>
+        <div class="filter-row"><div class="field" style="flex:1 1 240px"><label for="question-search">Tìm câu hỏi</label><input id="question-search" placeholder="Từ khóa"></div><div class="field"><label for="question-topic">Chủ đề</label><select id="question-topic"><option>Tất cả chủ đề</option><option>Chủ đề mẫu A</option><option>Chủ đề mẫu B</option></select></div><button class="btn" type="button" data-toast="Filter mock applied.">Lọc</button></div>
+        <div class="table-wrap" role="region" aria-label="Bảng câu hỏi có thể cuộn ngang" tabindex="0"><table><thead><tr><th>Nội dung</th><th>Loại</th><th>Chủ đề</th><th>Trạng thái</th><th>Thao tác</th></tr></thead><tbody><tr><td>Câu hỏi mẫu 01…</td><td>Một đáp án đúng</td><td>Chủ đề mẫu A</td><td>Hoạt động</td><td><button class="btn" type="button" data-dialog-open="question-dialog">Sửa</button> <button class="btn btn--danger" type="button" data-toast="Delete confirmation mock — persistence semantics chưa được quyết định.">Xóa</button></td></tr><tr><td>Câu hỏi mẫu 02…</td><td>Đúng/Sai</td><td>Chủ đề mẫu B</td><td>Hoạt động</td><td><button class="btn" type="button" data-dialog-open="question-dialog">Sửa</button> <button class="btn btn--danger" type="button" data-toast="Delete confirmation mock — persistence semantics chưa được quyết định.">Xóa</button></td></tr></tbody></table></div>
+        <nav class="pagination" aria-label="Phân trang ngân hàng câu hỏi"><button class="btn" type="button" disabled>Trước</button><button class="btn btn--primary" type="button" aria-current="page">1</button><button class="btn" type="button" data-toast="Admin pagination mock.">Sau</button></nav>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-admin-handbook" data-screen-id="SCR-ADM-004" hidden>
+    <div class="admin-shell">
+      <aside class="admin-sidebar"><h2>ADMIN P0</h2><nav aria-label="Admin P0"><button class="btn" type="button" data-target="screen-admin-dashboard">Dashboard</button><button class="btn" type="button" data-target="screen-admin-questions">Ngân hàng câu hỏi</button><button class="btn btn--primary" type="button" data-target="screen-admin-handbook">Cẩm nang</button></nav></aside>
+      <div class="admin-main">
+        <details class="admin-mobile-menu"><summary>Menu Admin P0</summary><nav><button class="btn" type="button" data-target="screen-admin-dashboard">Dashboard</button><button class="btn" type="button" data-target="screen-admin-questions">Ngân hàng câu hỏi</button><button class="btn btn--primary" type="button" data-target="screen-admin-handbook">Cẩm nang</button></nav></details>
+        <div class="screen-header"><div><p class="screen-id">SCR-ADM-004 · UC-ADM-001 · UC-FILE-001</p><h1 tabindex="-1">Quản lý Cẩm nang</h1></div><button class="btn btn--primary" type="button" data-dialog-open="handbook-dialog">+ Thêm bài</button></div>
+        <p class="notice">Upload limit pending OI-005; Office preview feasibility pending OI-015. Không khóa editor/storage.</p>
+        <div class="filter-row"><div class="field" style="flex:1 1 240px"><label for="admin-handbook-search">Tìm bài</label><input id="admin-handbook-search" placeholder="Từ khóa"></div><div class="field"><label for="admin-handbook-category">Danh mục</label><select id="admin-handbook-category"><option>Tất cả danh mục</option><option>Điều lệnh</option><option>Kỹ năng</option></select></div><button class="btn" type="button" data-toast="Filter mock applied.">Lọc</button></div>
+        <div class="table-wrap" role="region" aria-label="Bảng bài Cẩm nang có thể cuộn ngang" tabindex="0"><table><thead><tr><th>Tiêu đề</th><th>Danh mục</th><th>Trạng thái</th><th>Ngày mẫu</th><th>Thao tác</th></tr></thead><tbody><tr><td>Điều lệnh quản lý bộ đội</td><td>Điều lệnh</td><td>Đã đăng</td><td>—</td><td><button class="btn" type="button" data-dialog-open="handbook-dialog">Sửa</button> <button class="btn" type="button" data-toast="Publish mock success — không có approval workflow.">Đăng</button> <button class="btn btn--danger" type="button" data-toast="Delete confirmation mock.">Xóa</button></td></tr><tr><td>Kỹ năng xử lý tình huống</td><td>Kỹ năng</td><td>Chưa đăng</td><td>—</td><td><button class="btn" type="button" data-dialog-open="handbook-dialog">Sửa</button> <button class="btn" type="button" data-toast="Publish mock success — không có approval workflow.">Đăng</button> <button class="btn btn--danger" type="button" data-toast="Delete confirmation mock.">Xóa</button></td></tr></tbody></table></div>
+        <nav class="pagination" aria-label="Phân trang quản lý Cẩm nang"><button class="btn" type="button" disabled>Trước</button><button class="btn btn--primary" type="button" aria-current="page">1</button><button class="btn" type="button" data-toast="Admin pagination mock.">Sau</button></nav>
+      </div>
+    </div>
+  </section>
+</main>
+
+<dialog class="dialog" id="quiz-start-dialog" aria-labelledby="quiz-start-title"><div class="dialog__body"><h2 id="quiz-start-title">Xác nhận bắt đầu</h2><p>Prototype sẽ mở màn hình làm bài. Attempt count/fixed-resume pending OI-007; timeout pending OI-008.</p><div class="actions"><button class="btn" type="button" data-dialog-close>Hủy</button><button class="btn btn--primary" type="button" data-dialog-close data-target="screen-quiz-attempt">Bắt đầu mock</button></div></div></dialog>
+<dialog class="dialog" id="quiz-submit-dialog" aria-labelledby="quiz-submit-title"><div class="dialog__body"><h2 id="quiz-submit-title">Xác nhận nộp bài</h2><p>Submit-unanswered policy pending OI-007. Prototype không chấm/ranking; kết quả sau đây chỉ là presentation mock.</p><div class="actions"><button class="btn" type="button" data-dialog-close>Tiếp tục làm</button><button class="btn btn--primary" type="button" data-dialog-close data-target="screen-quiz-result">Xác nhận nộp mock</button></div></div></dialog>
+<dialog class="dialog" id="question-dialog" aria-labelledby="question-dialog-title"><form class="dialog__body mock-dialog-form" method="dialog"><h2 id="question-dialog-title">Thêm/Sửa câu hỏi — mock panel</h2><div class="field"><label for="question-content">Nội dung câu hỏi</label><textarea id="question-content" required></textarea></div><div class="field"><label for="question-type">Loại câu hỏi</label><select id="question-type"><option>Một đáp án đúng</option><option>Đúng/Sai</option></select></div><div class="field"><label for="question-dialog-topic">Chủ đề</label><select id="question-dialog-topic"><option>Chủ đề mẫu A</option><option>Chủ đề mẫu B</option></select></div><p class="muted">Options/correct-answer capability placeholder; không DTO/schema.</p><div class="actions"><button class="btn" type="button" data-dialog-close>Hủy</button><button class="btn btn--primary" type="submit">Lưu mock</button></div></form></dialog>
+<dialog class="dialog" id="handbook-dialog" aria-labelledby="handbook-dialog-title"><form class="dialog__body mock-dialog-form" method="dialog"><h2 id="handbook-dialog-title">Thêm/Sửa bài Cẩm nang — mock panel</h2><div class="field"><label for="handbook-title">Tiêu đề</label><input id="handbook-title" required></div><div class="field"><label for="handbook-dialog-category">Danh mục</label><select id="handbook-dialog-category"><option>Điều lệnh</option><option>Kỹ năng</option></select></div><div class="field"><label for="handbook-content">Nội dung</label><textarea id="handbook-content"></textarea></div><div class="field"><label for="handbook-file">File/media placeholder</label><input id="handbook-file" type="file"><span class="muted">Không có size rule vì OI-005; không upload thật.</span></div><div class="actions"><button class="btn" type="button" data-dialog-close>Hủy</button><button class="btn btn--primary" type="submit">Lưu mock</button></div></form></dialog>
+
+<div id="toast" role="status" aria-live="polite" hidden></div>
+
+<script>
+(() => {
+  'use strict';
+  const screens = [...document.querySelectorAll('.screen[data-screen-id]')];
+  const toast = document.getElementById('toast');
+  let toastTimer;
+
+  function showToast(message) {
+    window.clearTimeout(toastTimer);
+    toast.textContent = message;
+    toast.hidden = false;
+    toastTimer = window.setTimeout(() => { toast.hidden = true; }, 2200);
+  }
+
+  function showScreen(targetId) {
+    const target = document.getElementById(targetId);
+    if (!target || !target.matches('.screen[data-screen-id]')) {
+      throw new Error(`Unknown screen target: ${targetId}`);
+    }
+    document.querySelectorAll('dialog[open]').forEach(dialog => dialog.close());
+    screens.forEach(screen => { screen.hidden = screen !== target; });
+    window.scrollTo(0, 0);
+    const heading = target.querySelector('h1');
+    if (heading) heading.focus({ preventScroll: true });
+    window.location.hash = target.dataset.screenId;
+  }
+
+  document.addEventListener('click', event => {
+    const targetButton = event.target.closest('[data-target]');
+    if (targetButton) {
+      showScreen(targetButton.dataset.target);
+      return;
+    }
+    const dialogButton = event.target.closest('[data-dialog-open]');
+    if (dialogButton) {
+      const dialog = document.getElementById(dialogButton.dataset.dialogOpen);
+      if (!dialog || !(dialog instanceof HTMLDialogElement)) throw new Error(`Unknown dialog: ${dialogButton.dataset.dialogOpen}`);
+      dialog.showModal();
+      return;
+    }
+    const closeButton = event.target.closest('[data-dialog-close]');
+    if (closeButton) {
+      const dialog = closeButton.closest('dialog');
+      if (dialog) dialog.close();
+      return;
+    }
+    const toastButton = event.target.closest('[data-toast]');
+    if (toastButton) showToast(toastButton.dataset.toast);
+  });
+
+  document.getElementById('login-form').addEventListener('submit', event => {
+    event.preventDefault();
+    const username = document.getElementById('login-username');
+    const password = document.getElementById('login-password');
+    const status = document.getElementById('login-status');
+    if (!username.value.trim() || !password.value) {
+      status.textContent = 'Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu.';
+      status.hidden = false;
+      return;
+    }
+    status.hidden = true;
+    showScreen('screen-home');
+  });
+
+  document.getElementById('register-form').addEventListener('submit', event => {
+    event.preventDefault();
+    const username = document.getElementById('register-username');
+    const password = document.getElementById('register-password');
+    const code = document.getElementById('register-code');
+    const status = document.getElementById('register-status');
+    const success = document.getElementById('register-success');
+    if (!username.value.trim() || !password.value || !code.value.trim()) {
+      success.hidden = true;
+      status.textContent = 'Vui lòng nhập đủ username, password và mã giới thiệu.';
+      status.hidden = false;
+      return;
+    }
+    status.hidden = true;
+    success.hidden = false;
+  });
+
+  document.getElementById('show-invalid-code').addEventListener('click', () => {
+    document.getElementById('register-success').hidden = true;
+    const status = document.getElementById('register-status');
+    status.textContent = 'Mã giới thiệu không hợp lệ. Chi tiết lifecycle chờ OI-006.';
+    status.hidden = false;
+  });
+
+  document.getElementById('handbook-search-form').addEventListener('submit', event => {
+    event.preventDefault();
+    const term = document.getElementById('handbook-search').value.trim().toLocaleLowerCase('vi');
+    const items = [...document.querySelectorAll('#handbook-items [data-search-text]')];
+    let visible = 0;
+    items.forEach(item => {
+      const match = !term || item.dataset.searchText.includes(term);
+      item.hidden = !match;
+      if (match) visible += 1;
+    });
+    document.getElementById('handbook-state').textContent = visible ? `Mock result: ${visible} bài.` : 'Empty state: không tìm thấy bài phù hợp.';
+  });
+
+  document.getElementById('handbook-reset').addEventListener('click', () => {
+    document.getElementById('handbook-search').value = '';
+    document.querySelectorAll('#handbook-items [data-search-text]').forEach(item => { item.hidden = false; });
+    document.getElementById('handbook-state').textContent = 'Mock list có pagination; media chỉ dùng thumbnail.';
+  });
+
+  document.getElementById('preview-media').addEventListener('click', () => {
+    document.getElementById('handbook-media').innerHTML = 'MEDIA PREVIEW MOCK<br>Explicit action only; không tải file/media thật.';
+  });
+
+  document.querySelectorAll('input[name="answer"]').forEach(input => {
+    input.addEventListener('change', () => {
+      document.getElementById('answer-status').textContent = 'Đã chọn đáp án cho câu đang hiển thị (mock).';
+    });
+  });
+
+  function updateRankingContext() {
+    const scope = document.getElementById('ranking-scope').value;
+    const period = document.getElementById('ranking-period').value;
+    document.getElementById('ranking-context').textContent = `Đang hiển thị mock: ${scope} · ${period}`;
+  }
+  document.getElementById('ranking-scope').addEventListener('change', updateRankingContext);
+  document.getElementById('ranking-period').addEventListener('change', updateRankingContext);
+
+  document.querySelectorAll('.mock-dialog-form').forEach(form => {
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      form.closest('dialog').close();
+      showToast('Lưu mock thành công — không persistence/backend.');
+    });
+  });
+
+  const hashScreen = screens.find(screen => `#${screen.dataset.screenId}` === window.location.hash);
+  if (hashScreen) showScreen(hashScreen.id);
+})();
+</script>
+</body>
+</html>
