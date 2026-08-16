@@ -1,5 +1,45 @@
 # CHANGELOG
 
+## 2026-08-16 — P0 UI Acceptance Review
+
+Fixed:
+- Reset the mobile filter-panel flex basis so Handbook, Question Bank and Admin Handbook search/filter controls no longer expand to roughly 260 px in height.
+- Made the Admin Dashboard retry control produce an explicit local mock response while retaining the `OI-013` metric placeholder.
+- Added a focused Playwright assertion for that retry response in the existing Admin P0 flow.
+
+Verified:
+- Browser visual/runtime review PASS for all 12 P0 screens at 1280×800 and 375×812: no global horizontal overflow, material console/page error, failed request or business API request.
+- Frontend typecheck and production build PASS. Entry JS is 30.15 kB, largest JS chunk 297.79 kB and CSS 20.22 kB; no Vite >500 kB warning.
+- Playwright PASS 12/12: six desktop Chromium and six mobile Chromium tests.
+- Exact 12-screen set, nine Home modules, ten required Open Issue references and mock boundary remain intact; no dependency, backend, database, Flyway or wireframe change.
+
+Status:
+- UI Reporting Acceptance is `PASS`; the project gate remains `P0_UI_REVIEW_READY`, not `Accepted`.
+
+Report:
+- `docs/reports/2026-08-16-P0-UI-ACCEPTANCE-REVIEW.md`
+
+## 2026-08-16 — P0 UI Reporting Prototype
+
+Added/changed:
+- Implemented all 12 P0 Screen IDs in React from the Review Ready Screen Catalog and wireframe, covering Authentication, Home, Handbook, Quiz, Competition and Admin flows.
+- Added an isolated local-mock boundary, User/Admin portal layouts, meaningful prototype states and responsive behavior without backend/API/DB integration.
+- Preserved `OI-002`, `OI-005`, `OI-006`, `OI-007`, `OI-008`, `OI-009`, `OI-012`, `OI-013`, `OI-014` and `OI-015` as explicit UI annotations instead of encoding unresolved business rules.
+- Replaced shell smoke coverage with six named P0 prototype flows executed on both Playwright projects.
+
+Verified:
+- Static P0 source/reference audit PASS (20/20): exact 12 screens, exact nine Home modules, routes, mock boundary, Open Issues and prohibited-design checks.
+- Frontend typecheck and production build PASS. Route-level lazy loading reduced the entry chunk to 30.15 kB (9.15 kB gzip); the largest generated chunk is 297.79 kB (100.00 kB gzip), with no Vite >500 kB warning and no bundled media asset.
+- Playwright PASS 12/12: six flows on desktop Chromium and six on mobile Chromium.
+- Headless visual/runtime review PASS at 1280×800 and 375×812: no checked global horizontal overflow or console/page error; Admin Drawer and CRUD modal were usable.
+
+Status:
+- P0 React UI prototype is `Review Ready`, not `Accepted`; all data and mutations remain local mock behavior.
+- No dependency, backend, API, database, CI or runtime configuration was added or changed.
+
+Report:
+- `docs/reports/2026-08-16-P0-UI-REPORTING-PROTOTYPE.md`
+
 ## 2026-08-16 — P0 Wireframe Finalization
 
 Added/changed:

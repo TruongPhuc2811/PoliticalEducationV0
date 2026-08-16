@@ -14,7 +14,17 @@ const queryClient = new QueryClient({
 export function AppProviders({ children }: PropsWithChildren) {
   return (
     <QueryClientProvider client={queryClient}>
-      <ConfigProvider>
+      <ConfigProvider
+        theme={{
+          token: {
+            colorPrimary: '#a7191f',
+            colorInfo: '#a7191f',
+            borderRadius: 10,
+            fontFamily:
+              'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+          },
+        }}
+      >
         {children}
       </ConfigProvider>
     </QueryClientProvider>

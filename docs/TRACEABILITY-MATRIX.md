@@ -2,11 +2,28 @@
 
 **Project:** Hệ thống Giáo dục Chính trị  
 **Version:** V0.2  
-**Date:** 2026-08-15  
-**Status:** Review Ready for Requirement → Use Case → Screen  
+**Date:** 2026-08-16
+**Status:** Review Ready for Requirement → Use Case → Screen; P0 UI prototype implementation/test linked
 **Source:** `docs/v0.1/BUSINESS-REQUIREMENTS.md`
 
-API, DB và final Test vẫn là `TBD`; V0.2 không thiết kế endpoint, table/entity hoặc test case final.
+API, DB và final Test vẫn là `TBD`; V0.2 không thiết kế endpoint, table/entity hoặc test case final. Các test `E2E-P0-UI-*` bên dưới chỉ xác minh prototype UI local-mock, không phải business E2E hoặc acceptance test cuối.
+
+## P0 UI prototype implementation trace (non-final)
+
+| Screen ID | React route | UI implementation | Prototype UI test |
+|---|---|---|---|
+| `SCR-AUTH-001` | `/login` | `frontend/src/pages/auth/LoginPage.tsx` | `E2E-P0-UI-001` |
+| `SCR-AUTH-002` | `/register` | `frontend/src/pages/auth/RegisterPage.tsx` | `E2E-P0-UI-001` |
+| `SCR-HOME-001` | `/home` | `frontend/src/pages/home/HomePage.tsx` | `E2E-P0-UI-001` |
+| `SCR-HAN-002` | `/handbook` | `frontend/src/pages/handbook/HandbookListPage.tsx` | `E2E-P0-UI-002` |
+| `SCR-HAN-003` | `/handbook/:contentId` | `frontend/src/pages/handbook/HandbookDetailPage.tsx` | `E2E-P0-UI-002` |
+| `SCR-QUIZ-001` | `/quizzes` | `frontend/src/pages/quiz/QuizListPage.tsx` | `E2E-P0-UI-003` |
+| `SCR-QUIZ-003` | `/quizzes/:quizId/attempt` | `frontend/src/pages/quiz/QuizAttemptPage.tsx` | `E2E-P0-UI-003` |
+| `SCR-QUIZ-004` | `/quizzes/:quizId/result` | `frontend/src/pages/quiz/QuizResultPage.tsx` | `E2E-P0-UI-003` |
+| `SCR-COMP-002` | `/competition/ranking` | `frontend/src/pages/competition/CompetitionRankingPage.tsx` | `E2E-P0-UI-004` |
+| `SCR-ADM-001` | `/admin` | `frontend/src/pages/admin/AdminDashboardPage.tsx` | `E2E-P0-UI-005`, `E2E-P0-UI-006` (navigation only) |
+| `SCR-ADM-008` | `/admin/question-bank` | `frontend/src/pages/admin/QuestionBankPage.tsx` | `E2E-P0-UI-005` |
+| `SCR-ADM-004` | `/admin/handbook` | `frontend/src/pages/admin/AdminHandbookPage.tsx` | `E2E-P0-UI-006` |
 
 | Requirement ID | Functional Spec / Use Case | Screen | API | DB | Test | Status / Notes |
 |---|---|---|---|---|---|---|
