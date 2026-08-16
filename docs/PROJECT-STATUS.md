@@ -2,7 +2,7 @@
 
 **Project:** Hệ thống Giáo dục Chính trị
 **Updated:** 2026-08-16
-**Current gate:** `V0.5_UI_GUIDELINE_ACCEPTED`
+**Current gate:** `V0.3_SYSTEM_DESIGN_ACCEPTED`
 
 ## Milestones
 
@@ -24,7 +24,7 @@
 | P0 React UI Prototype | Review Ready | 12/12 P0 Screen IDs implemented with isolated local mock data; User/Admin flows and responsive layouts verified |
 | UI Reporting Acceptance | PASS | Desktop/mobile visual QA PASS; two evidenced MEDIUM issues fixed; no BLOCKER/HIGH remains; gate stays Review Ready |
 | P0 UI prototype tests | Validated | Six prototype flows PASS on desktop and mobile Chromium (12/12); not final business E2E |
-| V0.3 System Design | Placeholder | Do not treat as approved |
+| V0.3 System Design | Accepted | Architecture baseline with 14 module boundaries, ADR-004 server-session auth, `/api/v1`, ProblemDetail, storage/integration/runtime/security design; all OI preserved; V0.4 remains partially blocked |
 | V0.4 Database Design | Placeholder | Do not create final schema from placeholder |
 | V0.5 UI Guideline | Accepted | Current UI/UX implementation baseline; candidate brand values and official organizational assets remain Pending and are not promoted to final branding |
 | V0.5 UI/UX Specification | Accepted — scope/index | References the Accepted normative baseline and records validated P0/pending boundaries without duplicating the guideline |
@@ -57,11 +57,12 @@
 
 ## Next recommended Codex task
 
-Start V0.3 System Design for MVP backend/API/integration baseline.
+Resolve V0.4-blocking business decisions before final Database Design.
 
 ## Version gates
 
 - Do not implement final DB schema before V0.4 is approved.
+- V0.3 acceptance does not close `OI-*` or approve physical schema; blocked V0.4 areas must wait for owner decisions recorded in System Design §35.
 - Do not claim official organizational branding or final visual identity from V0.5 baseline acceptance; candidate/Pending assets remain controlled decisions.
 - Do not claim E2E completion from the current shell smoke test.
 - `Review Ready` does not mean V0.2 is `Accepted`; blocking Open Issues must be decided before affected implementation.

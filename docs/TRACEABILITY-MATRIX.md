@@ -1,12 +1,33 @@
 # TRACEABILITY MATRIX
 
-**Project:** Hệ thống Giáo dục Chính trị  
-**Version:** V0.2  
+**Project:** Hệ thống Giáo dục Chính trị
+**Version:** V0.2 + V0.3 System Design supplement
 **Date:** 2026-08-16
-**Status:** Review Ready for Requirement → Use Case → Screen; P0 UI prototype implementation/test linked
+**Status:** V0.3 architecture/module/API domain boundary Accepted; V0.2 Requirement → Use Case → Screen remains Review Ready; P0 UI prototype implementation/test linked
 **Source:** `docs/v0.1/BUSINESS-REQUIREMENTS.md`
 
-API, DB và final Test vẫn là `TBD`; V0.2 không thiết kế endpoint, table/entity hoặc test case final. Các test `E2E-P0-UI-*` bên dưới chỉ xác minh prototype UI local-mock, không phải business E2E hoặc acceptance test cuối.
+V0.3 đã Accepted module ownership và **conceptual API domain boundary** với namespace `/api/v1`; vẫn không tạo endpoint/DTO final. DB là `TBD — V0.4`; final Test là `TBD — V0.6/implementation`. Các test `E2E-P0-UI-*` bên dưới chỉ xác minh prototype UI local-mock, không phải business E2E hoặc acceptance test cuối.
+
+## V0.3 System Design supplement (non-final API/DB)
+
+| Requirement / Use Case group | Owning module(s) | Conceptual API/application boundary | DB | Final test | Decision dependency |
+|---|---|---|---|---|---|
+| `USR-001..USR-003`; `UC-AUTH-001`, `UC-AUTH-002`, `UC-ADM-INV-001` | `auth`, `user` | Authentication, registration and invitation capabilities under `/api/v1` | TBD — V0.4 | TBD | `OI-006`; `TD-001` Approved by ADR-004; `TD-003` partially Approved/Deferred |
+| `USR-004`; `UC-ADM-USER-001` | `user` | Account/profile-lite and role administration capability | TBD — V0.4 | TBD | `OI-014` |
+| `HAN-001..HAN-005`; `UC-HAN-001..003`, `UC-ADM-001` | `handbook` | Handbook browse/search/detail/admin capability | TBD — V0.4 | TBD | `OI-005`, `OI-015` for file behavior |
+| `RES-001..RES-005`; `UC-RES-001..002`, `UC-ADM-001` | `resolution` | Resolution browse/detail/admin capability | TBD — V0.4 | TBD | `OI-005`, `OI-015` |
+| `NEWS-001..NEWS-005`; `UC-NEWS-001..003`, `UC-ADM-001` | `news` | News browse/detail/admin and provider normalization boundary | TBD — V0.4 | TBD | `OI-001`, `OI-005` |
+| `MUS-001..MUS-004`; `UC-MUS-001..002`, `UC-ADM-001` | `music` | Music browse/play-metadata/admin capability | TBD — V0.4 | TBD | `OI-005` |
+| `QUIZ-001..QUIZ-010`; `UC-QUIZ-001..006` | `quiz` | Question Bank, test configuration, attempt, submission, result and ranking boundaries | TBD — V0.4 | TBD | `OI-002`, `OI-007..OI-009` |
+| `EDU-001..EDU-004`; `UC-EDU-001..002`, `UC-ADM-001` | `politicaleducation` | Program/topic/lecture/document capability; Test association deferred | TBD — V0.4 | TBD | `OI-005`, `OI-011`, `OI-012`, `OI-015` |
+| `HCM-001..HCM-004`; `UC-HCM-001..002`, `UC-HOME-001`, `UC-ADM-001` | `hochiminh` | Today/detail/admin capability | TBD — V0.4 | TBD | `OI-005` where media applies |
+| `WEEK-001..WEEK-005`; `UC-WEEK-001..003` | `weeklyquestion` | Configure/current/submit/grade/reveal capability | TBD — V0.4 | TBD | `OI-002`, `OI-010` |
+| `COMP-001..COMP-007`; `UC-COMP-001..004` | `competition` | Eligible input, score/ranking query and policy boundary after approval | TBD — V0.4 | TBD | `OI-002`, `OI-012`, `OI-014` |
+| `REP-001..REP-006`; `UC-REP-001..003` | `dashboard` | Widget/report query and on-demand export boundary | TBD — V0.4 | TBD | `OI-002`, `OI-013`, `OI-014`, `TD-005` |
+| `FILE-001..FILE-005`; `UC-FILE-001..003` | `file` | `StorageService` metadata/store/open/delete and authorized delivery capability | TBD — V0.4 | TBD | `OI-005`, `OI-015`, `TD-004` |
+| `HOME-001..HOME-005`; `UC-HOME-001` | content modules + `dashboard` query composition | User Portal composition consumes public/query capabilities; no cross-module repository access | TBD — V0.4 | TBD | `OI-013` only if popular content is added |
+| `ADM-001..ADM-004`; Admin UCs | owning feature modules; `auth`/`user`; `dashboard` | Role-protected Admin capabilities; no separate generic business repository | TBD — V0.4 | TBD | Domain OIs above; no granular permission matrix |
+| `NFR-001..NFR-010`, `TECH-001..TECH-012` | `common` technical support + all modules | Spring MVC/Security/JPA/Flyway/OpenAPI/Actuator and no-Docker runtime conventions | N/A at requirement level; V0.4 applies MySQL/Flyway | TBD | `OI-003`; `TD-001` Approved; remaining `TD-*` statuses in V0.3 |
 
 ## P0 UI prototype implementation trace (non-final)
 

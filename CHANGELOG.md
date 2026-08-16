@@ -1,5 +1,52 @@
 # CHANGELOG
 
+## 2026-08-16 — V0.3 System Design Approval
+
+Reviewed/fixed:
+- Reviewed the full System Design against V0.1/V0.2, the 14-package backend skeleton, Accepted ADRs, traceability and V0.5 integration boundary.
+- Split the password-storage principle from the still-Deferred anti-brute-force/lockout policy and made all six `TD-*` statuses explicit.
+- Added the required V0.4 Ready/Blocked assessment without creating physical schema.
+- Clarified that current HTTP Basic is skeleton-only and not the production browser mechanism.
+
+Approved:
+- V0.3 architecture baseline, exact 14 module boundaries, dependency/transaction rules, `/api/v1`, Spring ProblemDetail, DTO/persistence separation and StorageService/local-filesystem V1 direction.
+- `TD-001` server-managed same-origin session with HttpOnly/Secure/`SameSite=Lax` cookie and CSRF protection, recorded in Accepted ADR-004.
+- `TD-003` password-storage principle through Spring Security `PasswordEncoder`; exact work factor and anti-brute-force/lockout policy remain Deferred.
+
+Preserved:
+- `OI-001..OI-015`; no business ambiguity was closed.
+- `TD-002`, `TD-004`, `TD-005`, `TD-006` remain Deferred; the non-password-storage portion of `TD-003` remains Deferred.
+- No application/config/package/CI/database/Flyway change.
+
+Status:
+- V0.3 System Design is `Accepted`; current gate is `V0.3_SYSTEM_DESIGN_ACCEPTED`.
+- Final V0.4 design remains blocked in invitation, organization, quiz attempt/result, weekly lifecycle, EDU Test, competition and popular-content areas.
+
+Report:
+- `docs/reports/2026-08-16-V0.3-SYSTEM-DESIGN-APPROVAL.md`
+
+## 2026-08-16 — V0.3 System Design Draft
+
+Added/changed:
+- Replaced the V0.3 placeholder with a Review Ready system-design baseline for the Java 21/Spring Boot Modular Monolith, REST integration, security, local-file storage and no-Docker runtime.
+- Defined exactly 14 current module boundaries, ownership/dependency/transaction rules, unified ProblemDetail/error conventions, server-side pagination and low-resource/failure-mode principles.
+- Proposed server-managed same-origin browser sessions and `/api/v1` conventions for review; neither is silently marked Accepted.
+- Added a V0.3 traceability supplement mapping Requirement/Use Case groups to module and conceptual API/application boundaries while keeping DB at `TBD — V0.4` and final tests TBD.
+
+Preserved:
+- `OI-001..OI-015`; no invitation, quiz, weekly, EDU-test, competition, popular-content, upload/preview or production-infrastructure ambiguity was resolved.
+- Technology Baseline, Accepted ADRs and V0.5 UI baseline remain unchanged.
+
+Not implemented:
+- No backend/frontend/E2E/runtime config, dependency, entity/JPA model, endpoint/DTO, database schema, SQL or Flyway business migration was created.
+
+Status:
+- V0.3 System Design is `Review Ready`, not `Accepted`.
+- Current gate is `V0.3_SYSTEM_DESIGN_REVIEW_READY`.
+
+Report:
+- `docs/reports/2026-08-16-V0.3-SYSTEM-DESIGN-DRAFT.md`
+
 ## 2026-08-16 — V0.5 UI Guideline Approval
 
 Reviewed/fixed:
