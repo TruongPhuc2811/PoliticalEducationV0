@@ -636,15 +636,15 @@ State mapping:
 | `OI-014` | `user`, `competition`, `dashboard` | Neutral organization query boundary | Yes, organization/assignment/ranking relationships | Yes, organization config and group competition |
 | `OI-015` | `file`, content modules | Download fallback; no converter | No for storage metadata; yes if preview artifact needed | Yes, Word/PowerPoint preview only |
 
-No OI is closed by V0.3.
+No OI was closed by V0.3. **V0.4 Owner Decision Amendments applied 2026-08-18:** `OI-002`, `OI-006`, `OI-007`, `OI-008`, `OI-009`, `OI-010`, `OI-011`, `OI-012`, `OI-013`, `OI-014` are resolved — see `docs/decisions/V0.4-BLOCKING-BUSINESS-DECISIONS.md` and V0.2 §25.1. `OI-001`, `OI-003`, `OI-004`, `OI-005`, `OI-015` remain open.
 
 ### 32.1 Decision classification for downstream work
 
-- **A — blocks final V0.4 physical design in affected areas:** `OI-002`, `OI-006`, `OI-007`, `OI-008`, `OI-009`, `OI-010`, `OI-011`, `OI-012`, `OI-013`, `OI-014`.
+- **A — blocks final V0.4 physical design in affected areas:** ~~`OI-002`, `OI-006`, `OI-007`, `OI-008`, `OI-009`, `OI-010`, `OI-011`, `OI-012`, `OI-013`, `OI-014`~~ — **all resolved by V0.4 Owner Decisions 2026-08-18.**
 - **B — core structure can proceed, but affected integration/validation/seed/preview implementation remains blocked:** `OI-001`, `OI-004`, `OI-005`, `OI-015`.
 - **C — production-only/deferred:** `OI-003` blocks final production topology/deployment, not core domain data design.
 
-Classification does not close an OI or authorize a partial design to fabricate the missing rule.
+Classification does not close an OI or authorize a partial design to fabricate the missing rule. Resolved OIs above are documented in V0.2 §25.1 and `docs/decisions/V0.4-BLOCKING-BUSINESS-DECISIONS.md`.
 
 ## 33. Technical Decision backlog
 
@@ -672,43 +672,51 @@ No ADR is created for `TD-002..TD-006`: their unresolved host/business/operation
 
 `docs/TRACEABILITY-MATRIX.md` contains a V0.3 supplement mapping requirement/UC groups to module and conceptual API domain boundary. It deliberately keeps DB as `TBD — V0.4` and final tests as `TBD — V0.6/implementation`.
 
-### 35.1 Ready Areas
+**V0.4 Owner Decision Amendments applied 2026-08-18.** All 10 blocking OIs (`OI-002`, `OI-006`, `OI-007`, `OI-008`, `OI-009`, `OI-010`, `OI-011`, `OI-012`, `OI-013`, `OI-014`) resolved. **V0.4 Readiness = READY TO START.** See §32 and `docs/decisions/V0.4-BLOCKING-BUSINESS-DECISIONS.md`.
+
+### 35.1 Ready Areas (updated 2026-08-18)
 
 | Area | V0.4 work that may begin | Boundary |
 |---|---|---|
-| Core account/authentication | Username credential, role and basic account/profile concepts | Exclude invitation lifecycle and organization assignment (`OI-006`, `OI-014`) |
-| Content domains | Handbook, Resolution, Admin-authored News, Music metadata/link and Ho Chi Minh content/category/publication structures | External news, upload limits and Office preview remain partial/deferred |
-| Quiz administration | Question Bank, supported question types/topics and test configuration concepts already required | Exclude attempt/submission/result/ranking physical design |
-| File core | Storage metadata/reference and local-adapter identity needed for content attachment | No BLOB; exclude final limits/preview artifacts |
-| Reporting foundation | Period/filter and on-demand export boundary | Exclude competition/popular-content facts and library choice |
+| Core account/authentication | Username credential, role and basic account/profile concepts | External news (`OI-001`), upload limits (`OI-005`) and Office preview (`OI-015`) remain partial/deferred |
+| **Invitation registration/consumption** | Scoped single-use invitation (Tiểu đội-scoped, quota=1, configurable expiry, atomic consumption) | Exact expiry duration deferred to configuration/implementation |
+| **Organization assignment and group ranking** | Fixed hierarchy Đại đội > Trung đội > Tiểu đội; user Tiểu đội assignment; assignment history; Cán bộ/Chiến sĩ classification separate from system roles | No additional hierarchy levels; exact configuration fields to V0.4 |
+| Content domains | Handbook, Resolution, Admin-authored News, Music metadata/link and Ho Chi Minh content/category/publication structures | External news (`OI-001`), upload limits (`OI-005`) and Office preview (`OI-015`) remain partial/deferred |
+| Quiz administration | Question Bank, test configuration, attempt identity/lifecycle (limited/resumable/fixed set), timeout finalization, grading, result (internal raw score/Đạt-Không đạt display), ranking (highest eligible attempt) | Exact attempt limit numeric default deferred to configuration |
+| **Weekly question lifecycle/result** | Calendar-week period, one submission per user, auto-grade, reveal-after-close, view count (detail-view aggregate, no personal history) | Exact timezone/boundary configurable/pending |
+| **Political Education Test association** | EDU owns placement context (Program/Topic/Lecture); Quiz owns test/attempt/result; 0..1 Quiz per Lecture association | EDU does not access Quiz repository directly |
+| **Competition policy/calculation/leaderboard** | Admin-configurable policy per effective period; eligible sources: Quiz result + Weekly result + manual adjustment; unit aggregation normalized average Tiểu đội→Trung đội→Đại đội; periods weekly/monthly/yearly | Exact numeric weights/coefficients deferred; no learning completion source |
+| **Popular-content metric** | Aggregate detail-view count per domain/period; no personal history; included baseline domains defined | Music, Quiz/Weekly/Competition, Admin, Auth excluded; future unique-user metric requires decision |
+| File core | Storage metadata/reference and local-adapter identity needed for content attachment | No BLOB; exclude final limits (`OI-005`)/preview artifacts (`OI-015`) |
+| Reporting foundation | Period/filter and on-demand export boundary; competition/popular-content facts now have approved conceptual identity | Library choice still deferred (`TD-005`) |
 | Technical schema governance | MySQL/Flyway conventions, migration sequencing strategy and common audit timestamps only if V0.4 requirements justify them | No migration implementation during design |
 
-### 35.2 Blocked Areas
+### 35.2 Blocked Areas (updated 2026-08-18)
 
-| Area | Blocking OI | Why final physical model must wait |
+All previous physical-model blockers resolved by V0.4 Owner Decisions. The following implementation/integration/production blockers remain but do not block the V0.4 Database Design:
+
+| Area | Remaining blocking OI | Impact |
 |---|---|---|
-| Invitation registration/consumption | `OI-006` | Usage, expiry, quota, owner and assignment drive identity/constraints/concurrency |
-| Organization assignment and group ranking | `OI-014` | Hierarchy, membership and tiểu đội/trung đội/đại đội scope are unresolved |
-| Quiz attempt/submission/result/ranking | `OI-007`, `OI-008`, `OI-009`, `OI-002` | Lifecycle, timeout, score exposure/ranking and competition contribution affect identity/state/history |
-| Weekly question lifecycle/result | `OI-010`, `OI-002` | Rollover, repeats, reveal and competition contribution affect uniqueness/state |
-| Political Education Test association | `OI-011` | Module ownership/relationship to Quiz is unresolved |
-| Learning-completion competition source | `OI-012` | Baseline excludes progress data required by the proposed source |
-| Competition policy/calculation/leaderboard | `OI-002`, `OI-012`, `OI-014` | Formula, eligible sources and hierarchy are unresolved |
-| Popular-content facts/reporting | `OI-013` | No approved popularity metric/source event exists |
+| External News integration | `OI-001` | `UC-NEWS-003` implementation blocked; Admin-authored news unaffected |
+| Production deployment | `OI-003` | Final infrastructure/Nginx topology blocked; no core DB design impact |
+| Initial data seed/cutover | `OI-004` | UAT data preparation blocked; no schema impact |
+| Production upload validation | `OI-005` | File size/type limit values blocked; file metadata schema can proceed |
+| Office preview (Word/PowerPoint) | `OI-015` | Preview implementation blocked; download fallback authorized |
 
-V0.3 acceptance therefore does **not** unblock a final end-to-end V0.4 schema. Resolve the blocking business decisions before final Database Design; ready areas may only be analyzed without fabricating relationships needed by blocked areas.
+V0.4 Database Design may now start. V0.4 must:
 
-V0.4 may start only after V0.3 review/approval and must:
-
-1. Preserve module ownership and OI blockers.
-2. Map approved query/filter/concurrency needs to physical data design.
+1. Preserve module ownership defined in V0.3.
+2. Map approved Owner decisions (organization hierarchy, invitation scope, quiz lifecycle, weekly lifecycle, EDU-Quiz association, competition policy, popular-content metric) to physical data design.
 3. Define MySQL constraints/indexes/delete behavior from evidence.
-4. Create no migration until database design approval authorizes implementation.
+4. Keep deferred numeric values (expiry default, attempt limit default, competition weights) as configurable without inventing values.
+5. Create no migration until database design approval authorizes implementation.
 
 ## 36. Acceptance conclusion and next step
 
 This design is Accepted because system/runtime context, 14 boundaries, dependencies/transactions, Approved session auth/API/error baselines, authorization/DTO/file/integration/domain boundaries, DB/config/deployment/security/performance/failure handling, all 15 OIs and six accurately classified technical decisions are explicit without application/schema changes. Acceptance does not approve blocked business behavior or physical schema.
 
+**Update 2026-08-18:** All 10 V0.4-blocking business decisions (BD-V04-002, BD-V04-006..014) resolved by Project Owner. V0.4 Readiness = READY TO START. No physical schema created by this update; V0.3 architecture remains Accepted unchanged.
+
 Next best task:
 
-> Resolve V0.4-blocking business decisions before final Database Design.
+> **Start V0.4 Database Design** (all physical-model blockers resolved; OI-001/003/004/005/015 remain open for integration/production/file areas).

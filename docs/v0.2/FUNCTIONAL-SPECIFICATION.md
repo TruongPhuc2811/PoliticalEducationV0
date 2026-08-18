@@ -978,6 +978,8 @@ Các flow sau là đầu vào test, chưa phải test case final:
 
 ## 25. Open Issues / Decision Backlog
 
+**V0.4 Owner Decision Amendments applied 2026-08-18.** `OI-002`, `OI-006`, `OI-007`, `OI-008`, `OI-009`, `OI-010`, `OI-011`, `OI-012`, `OI-013`, `OI-014` are resolved — see §25.1 below. `OI-001`, `OI-003`, `OI-004`, `OI-005`, `OI-015` remain open.
+
 | ID | Description | Source conflict/gap | Blocks | Priority | Required by | Proposed decision owner |
 |---|---|---|---|---|---|---|
 | `OI-001` | Chưa xác định nguồn báo/tin ngoài và quyền/phương thức tích hợp. | `NEWS-004`; baseline không nêu nguồn | Backend, Test | Blocking cho NEWS integration; non-blocking MVP đăng trực tiếp/UI | Trước implementation `UC-NEWS-003` | Project Owner / Analyst |
@@ -996,7 +998,29 @@ Các flow sau là đầu vào test, chưa phải test case final:
 | `OI-014` | Chưa đủ mô hình organization hierarchy/assignment giữa Cán bộ-Chiến sĩ và Tiểu/Trung/Đại đội; `COMP-001` còn không liệt kê Tiểu đội trong đối tượng chấm nhưng `COMP-002` có ranking Tiểu đội. | `ACT-004`, `ADM-003`, `COMP-001`, `COMP-002` | Admin config, Competition Backend, DB, Test | Non-blocking P0 layout; blocking implementation | Trước user/org/competition design | Project Owner / Analyst |
 | `OI-015` | Khả năng preview Word/PowerPoint trên web và fallback theo browser/format cần quyết định kỹ thuật. | `FILE-002` dùng điều kiện “nếu khả thi” | UI behavior detail, Technical Design, Test | Non-blocking wireframe; blocking preview implementation | V0.3/V0.5 | Technical Design |
 
-### 25.1 Đối chiếu Functional Decision ID cũ
+### 25.1 OI Resolution Status — V0.4 Owner Decisions Applied 2026-08-18
+
+OI history above is preserved unchanged. The table below records the resolution status for each OI. Do not delete OI rows; do not renumber OI IDs.
+
+| OI | Resolution Status | Governing BD | Key approved rule |
+|---|---|---|---|
+| `OI-001` | **Open** | — | External news provider unresolved. |
+| `OI-002` | **Resolved — Project Owner Decision** | `BD-V04-002` | Option B: Admin-configurable policy; eligible sources = Quiz result + Weekly result + manual bonus/penalty; unit aggregation = normalized average; periods = weekly/monthly/yearly; ranking scopes = Cá nhân/Tiểu đội/Trung đội/Đại đội; equal rank for ties; closed period stable. Numeric weights deferred. |
+| `OI-003` | **Open** | — | Production hosting unresolved. |
+| `OI-004` | **Open** | — | Initial real data unresolved. |
+| `OI-005` | **Open** | — | Upload limits unresolved. |
+| `OI-006` | **Resolved — Project Owner Decision** | `BD-V04-006` | Option C: Scoped invitation; single-use (quota=1); Admin issuer; expiry configurable (default deferred); invitation scoped to one Tiểu đội; registration auto-creates assignment; no classification assigned by invitation; atomic consumption; disabled/expired/consumed = invalid. |
+| `OI-007` | **Resolved — Project Owner Decision** | `BD-V04-007` | Option B: Limited attempts; Admin-configurable limit (numeric default deferred); max 1 active attempt/user/test; resume=yes; fixed question set + order; unanswered submit allowed with confirmation; final submission idempotent; new attempt only when previous terminal and within limit. |
+| `OI-008` | **Resolved — Project Owner Decision** | `BD-V04-008` | Option A: Backend auto-finalizes and grades on timeout from persisted answers; unanswered per BD-V04-007; graded normally; late manual submit rejected; finalization idempotent; no scheduler required; UI timer informational. |
+| `OI-009` | **Resolved — Project Owner Decision** | `BD-V04-009` | Option A: Internal raw score persisted; USER sees Đạt/Không đạt only; raw score not exposed in V1; ranking uses highest eligible final graded attempt; timeout-finalized eligible; metric = raw score descending; equal rank for ties; secondary ordering display-only. |
+| `OI-010` | **Resolved — Project Owner Decision** | `BD-V04-010` | Option A: Calendar-week semantics; one submission/user/weekly question; no late submission; auto-grade; result final; correct answer + explanation revealed after period closes; no scheduler required; exact timezone/boundary configurable/pending. |
+| `OI-011` | **Resolved — Project Owner Decision** | `BD-V04-011` | Option A: EDU reuses Quiz capability; EDU owns placement/context (Program/Topic/Lecture/Document); Quiz owns test config/attempt/submission/grading/result; V1 cardinality 0..1 primary Quiz per Lecture; EDU calls public Quiz capability only; no EDU completion tracking. |
+| `OI-012` | **Resolved — Project Owner Decision** | `BD-V04-012` | Option A: Learning completion excluded from MVP competition scoring; no completion tracking created; Quiz/Weekly results are module facts, not reinterpreted as completion; future inclusion requires approved scope change. |
+| `OI-013` | **Resolved — Project Owner Decision** | `BD-V04-013` | Option A: Metric = aggregate successful detail-view count; no personal history/unique-user tracking/viewer identity; included domains: Handbook/Resolution/News/EDU/HCM; excluded: Quiz/Weekly/Competition/Admin/Auth/Music; count descending; equal count = equal position; future unique-user metric needs explicit decision. |
+| `OI-014` | **Resolved — Project Owner Decision** | `BD-V04-014` | Option A: Fixed hierarchy Đại đội > Trung đội > Tiểu đội; user has one current Tiểu đội assignment; Cán bộ/Chiến sĩ = business classification not system role; ranking scopes: Cá nhân/Tiểu đội/Trung đội/Đại đội; assignment history preserved; closed-period attribution unchanged by reassignment. |
+| `OI-015` | **Open** | — | Office preview feasibility unresolved. |
+
+### 25.2 Đối chiếu Functional Decision ID cũ
 
 Không rename âm thầm các ID đã xuất hiện trong Draft cũ:
 

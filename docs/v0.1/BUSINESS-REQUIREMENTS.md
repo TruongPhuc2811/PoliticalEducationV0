@@ -610,6 +610,118 @@ Nếu yêu cầu thay đổi:
 
 ---
 
+## 19. V0.4 Owner Decision Amendments — 2026-08-18
+
+This section records approved amendments resulting from the V0.4 Blocking Business Decision Pack (Project Owner decisions approved 2026-08-18). No Requirement IDs are changed. Where existing text would be contradicted, the governing rule is the Owner Decision. All changes are traceable to `docs/decisions/V0.4-BLOCKING-BUSINESS-DECISIONS.md`.
+
+### 19.1 Organization hierarchy and user assignment (BD-V04-014 → ACT-004, ADM-003, COMP-001, COMP-002, USR-004)
+
+- Hierarchy is **fixed**: Đại đội > Trung đội > Tiểu đội. No additional levels.
+- Each user (`ACT-003`) has exactly one **current Tiểu đội assignment**; assignment is the leaf-level membership.
+- `ACT-004` (Cán bộ/Chiến sĩ) is confirmed as **business classification only**, not a system role. Classification is managed separately on the user record, not through system roles.
+- Reassignment history is preserved over time; closed-period attribution does not change when a user is reassigned.
+- **Ranking scopes** (governing `COMP-001`, `COMP-002`): Cá nhân, Tiểu đội, Trung đội, Đại đội.
+  - `COMP-001` is amended: scoring/ranking now explicitly includes Tiểu đội alongside Trung đội and Đại đội.
+  - `COMP-002` ranking scopes confirmed: Cá nhân, Tiểu đội, Trung đội, Đại đội.
+
+### 19.2 Invitation lifecycle and scope (BD-V04-006 → USR-002, USR-003, RULE-002, ADM-003)
+
+- Invitation is **single-use** (quota = 1); Admin is the issuer.
+- **Expiry** is configurable; exact default duration is deferred to configuration/implementation.
+- Each invitation is **scoped to one Tiểu đội**; successful registration automatically creates the user's current assignment to that Tiểu đội.
+- Invitation does **not** assign Cán bộ/Chiến sĩ classification; classification is managed separately by Admin after registration.
+- Consumption must be **atomic**; a disabled, expired, or already-consumed invitation is not valid.
+
+### 19.3 Quiz attempt policy (BD-V04-007 → QUIZ-004..QUIZ-008, RULE-003, RULE-004)
+
+- Attempt count is **limited**; the limit is Admin-configurable. Exact numeric default is deferred to configuration/implementation.
+- Maximum **1 active attempt** per user per test at any time.
+- An active attempt **resumes** across refresh/re-login; it does not create a second active attempt.
+- The generated question set, question order, and answer order are **fixed** within an attempt.
+- **Unanswered submit** is permitted with user confirmation.
+- Final submission is **idempotent**.
+- A new attempt may only be created when the previous attempt has reached a terminal state and the user has not exceeded the configured limit.
+
+### 19.4 Quiz timeout finalization (BD-V04-008 → QUIZ-005, QUIZ-007)
+
+- The **backend is authoritative** for attempt time.
+- When configured duration expires, the backend **auto-finalizes** the attempt from answers already persisted; unanswered questions follow BD-V04-007 semantics.
+- The finalized attempt is graded normally.
+- **Late manual submission** after timeout finalization is not accepted.
+- Finalization is **idempotent**.
+- No background scheduler is required; finalization may occur at next request or via a controlled transition.
+- The UI timer is **informational only**.
+
+### 19.5 Quiz result and ranking policy (BD-V04-009 → QUIZ-007..QUIZ-010)
+
+- Raw grading score is **persisted internally** but is **not exposed to USER** in V1 baseline.
+- USER result UI displays **Đạt/Không đạt only** (confirms `QUIZ-008`).
+- Quiz ranking (`QUIZ-010`) uses the **highest eligible final graded attempt** per user per test.
+- A timeout-finalized attempt is eligible for ranking if otherwise valid.
+- Ranking metric: raw grading score descending. Equal scores share equal rank.
+- Deterministic secondary ordering is for display only and is not a business tie-break.
+
+### 19.6 Weekly question lifecycle (BD-V04-010 → WEEK-001..WEEK-005, RULE-005)
+
+- Period identity: **calendar-week** semantics.
+- **One submission** per user per weekly question; no additional submissions permitted.
+- Late submission after period closes is **not accepted**.
+- Server **auto-grades** the submission; the submitted result is final.
+- Correct answer and explanation are revealed **after the period closes**.
+- Competition eligibility controlled by BD-V04-002 (see §19.8).
+- Exact Monday/Sunday/timezone boundary is configurable/pending explicit implementation decision.
+
+### 19.7 Political Education Test association (BD-V04-011 → EDU-001, EDU-004)
+
+- The "Kiểm tra" element in `EDU-001` hierarchy **reuses Quiz module capability**.
+- Political Education owns: Program / Topic / Lecture / Document / placement-context.
+- Quiz module owns: test configuration / attempt / submission / grading / result.
+- V1 cardinality: **0..1 primary Quiz/Test per Lecture**.
+- EDU module calls the **public Quiz application capability**; it does not access the Quiz module repository directly.
+- EDU progress/completion tracking remains **excluded** (`EDU-004` unchanged).
+
+### 19.8 Competition sources and scoring policy (BD-V04-002 → COMP-001..COMP-007, RULE-006..RULE-008)
+
+- **Eligible source classes**: Quiz result; Weekly Question result; manual bonus/penalty adjustment.
+- **Excluded**: learning completion; undefined participation/activity sources until explicitly approved.
+- Policy and criteria are **Admin-configurable** within approved source classes; each policy version has an effective period.
+- Historical closed periods retain the policy version applied at the time.
+- **Manual adjustment**: allowed; Admin only; bonus or penalty; reason required; belongs to a competition period.
+- **Individual aggregation**: sum of approved contributions within the period.
+- **Unit aggregation**: normalized average of eligible-member individual scores; aggregates Tiểu đội → Trung đội → Đại đội. Raw total is not the unit ranking metric.
+- **Periods**: weekly, monthly, yearly.
+- **Tie**: equal final score shares equal rank; secondary deterministic ordering is display-only.
+- **Recalculation**: open period may recalculate when source facts or policy change; closed period is stable; changing a closed period requires explicit authorized correction.
+- Exact numeric coefficients and default weights are deferred to implementation/configuration; they must be Owner-approved before implementation of affected module.
+
+### 19.9 Learning-completion source excluded (BD-V04-012 → COMP-004, RES-005, EDU-004, OOS-006)
+
+- **`COMP-004` amendment**: "hoàn thành học tập" (learning completion) is **excluded from MVP competition scoring**.
+- Quiz result and Weekly result are Quiz/Weekly facts respectively; they are not reinterpreted as learning-completion facts.
+- `RES-005`, `EDU-004`, and `OOS-006` (no progress tracking) remain unchanged.
+- Future inclusion of learning completion as a competition source requires an explicit scope change approved through change-control.
+
+### 19.10 Popular-content metric (BD-V04-013 → REP-004, NEWS-005, MUS-004)
+
+- Popularity metric: **aggregate successful detail-view count**.
+- **No personal reading history**, no unique-user tracking, no viewer identity stored. Repeated valid detail views may count.
+- Included baseline domains: Cẩm nang người lính, Học tập nghị quyết, Đọc báo và nghe tin, Giáo dục chính trị, Lời Bác Hồ dạy.
+- Excluded by default: Quiz/Test; Weekly Question; Competition Ranking; Admin; authentication; Music.
+- Ranking: aggregate detail-view count descending within the reporting period.
+- Equal count: equal popularity position or deterministic display ordering; no business tie-break invented.
+- Future unique-user metric requires explicit scope/privacy decision.
+
+### 19.11 Deferred implementation values
+
+The following values are approved-conceptually but deferred to configuration/implementation:
+- Exact invitation expiry duration.
+- Exact quiz attempt limit numeric default.
+- Exact quiz grading point scale beyond pass/fail semantics.
+- Exact numeric competition weights/coefficients.
+- Exact calendar timezone/Monday boundary for weekly question.
+
+---
+
 ## 18. Approval criteria for V0.1
 
 V0.1 được coi là chốt khi:

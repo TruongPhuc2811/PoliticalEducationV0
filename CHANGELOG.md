@@ -1,5 +1,33 @@
 # CHANGELOG
 
+## 2026-08-18 — V0.4 Business Decisions Applied
+
+Applied:
+- Applied all 10 Project Owner decisions from the V0.4 Blocking Business Decision Pack (`BD-V04-002`, `BD-V04-006..BD-V04-014`).
+- Resolved `OI-002`, `OI-006`, `OI-007`, `OI-008`, `OI-009`, `OI-010`, `OI-011`, `OI-012`, `OI-013`, `OI-014` as `Resolved — Project Owner Decision`.
+- Added V0.4 Owner Decision Amendments (§19) to `docs/v0.1/BUSINESS-REQUIREMENTS.md` through change-control; no Requirement IDs changed.
+- Updated `docs/decisions/V0.4-BLOCKING-BUSINESS-DECISIONS.md` status to `Project Owner Decisions Approved`; all 10 Owner decision and Owner notes fields filled; option/trade-off history preserved.
+- Updated `docs/v0.2/FUNCTIONAL-SPECIFICATION.md` §25 with resolution status header and §25.1 OI Resolution Status table for all 15 OIs.
+- Updated `docs/v0.3/SYSTEM-DESIGN.md` §32 OI impact matrix and §35 V0.4 Readiness to reflect resolved decisions and expanded Ready Areas.
+- Updated `docs/TRACEABILITY-MATRIX.md` Decision dependency column to reference resolved BD-V04-* decisions.
+- Updated `docs/PROJECT-STATUS.md` with V0.4 Business Decisions Approved/Applied and V0.4 Readiness = READY TO START.
+
+Preserved:
+- `OI-001`, `OI-003`, `OI-004`, `OI-005`, `OI-015` remain open (integration/production/file/preview areas).
+- V0.3 System Design architecture remains `Accepted` and unchanged.
+- Technology Baseline, all ADRs and V0.5 UI baseline unchanged.
+- No application, API, database, Flyway migration, entity, runtime configuration or frontend source was created or changed.
+- No numeric default values invented for invitation expiry, quiz attempt limit or competition weights.
+
+Status:
+- Current gate remains `V0.3_SYSTEM_DESIGN_ACCEPTED`.
+- V0.4 Business Decisions: `Approved/Applied`.
+- V0.4 Readiness: `READY TO START`.
+- V0.4 Database Design: `Not Started` — next task.
+
+Report:
+- `docs/reports/2026-08-16-V0.4-BUSINESS-DECISIONS-APPLIED.md`
+
 ## 2026-08-16 — V0.4 Blocking Business Decision Pack
 
 Added:
