@@ -656,7 +656,7 @@ This section records approved amendments resulting from the V0.4 Blocking Busine
 
 - Raw grading score is **persisted internally** but is **not exposed to USER** in V1 baseline.
 - USER result UI displays **Đạt/Không đạt only** (confirms `QUIZ-008`).
-- Quiz ranking (`QUIZ-010`) uses the **highest eligible final graded attempt** per user per test.
+- Quiz ranking (`QUIZ-010`) uses the **highest valid final graded attempt** per user per test; PASS/FAIL does not itself gate a valid finalized result from Quiz ranking.
 - A timeout-finalized attempt is eligible for ranking if otherwise valid.
 - Ranking metric: raw grading score descending. Equal scores share equal rank.
 - Deterministic secondary ordering is for display only and is not a business tie-break.
@@ -719,6 +719,48 @@ The following values are approved-conceptually but deferred to configuration/imp
 - Exact quiz grading point scale beyond pass/fail semantics.
 - Exact numeric competition weights/coefficients.
 - Exact calendar timezone/Monday boundary for weekly question.
+
+### 19.12 Competition unit attribution rule (Owner Clarification 1A — 2026-08-18)
+
+**Approved: Option 1A — Period-end assignment attribution.**
+
+Governing requirements: `COMP-001`, `COMP-002`, `BD-V04-014`, `BD-V04-002`.
+
+- For each competition period, a user is attributed to **exactly one Tiểu đội**.
+- The Tiểu đội is determined by the organization assignment **effective at `competition_period.ends_at`**.
+- A user's scores are **not split across multiple Tiểu đội** within the same period.
+- The attributed Tiểu đội is used to derive the parent Trung đội and Đại đội for aggregation.
+- When a period is **CLOSED**, the unit attribution must be **snapshot/stabilized**; reassignment after period close does **not** alter the historical attribution.
+- A mid-period transfer does **not** cause the same user to be counted in two Tiểu đội for that period.
+- If no valid Tiểu đội assignment exists at `period.ends_at` (pathological edge case), business eligibility is **not invented**; the case is documented for implementation validation.
+
+### 19.13 Competition Quiz and Weekly source semantics (Owner Clarification 2A — 2026-08-18)
+
+**Approved: Option 2A.**
+
+Governing requirements: `QUIZ-007..QUIZ-010`, `WEEK-003..WEEK-005`, `COMP-003`, `BD-V04-009`, `BD-V04-002`.
+
+**Quiz contribution:**
+- Quiz module owns grading, result, and ranking semantics.
+- For a given Quiz/Test, the **highest eligible final graded attempt** is the result used for competition source selection.
+- Only a **PASS (Đạt)** result may produce a competition contribution.
+- A **FAIL (Không đạt)** result does **not** produce a competition contribution.
+- A timeout-finalized graded result remains valid under `BD-V04-008`/`BD-V04-009` rules.
+- Competition module owns whether and how the valid source result contributes points; competition policy provides the Admin-configured point value/weight.
+- No multiple Quiz contributions from multiple attempts of the same qualifying Quiz/Test in the same competition period.
+
+**Weekly Question contribution:**
+- A correct final Weekly submission **may** produce a competition contribution.
+- An **incorrect** result does **not** produce a competition contribution.
+- Point value/weight is Admin-configured in Competition policy.
+
+**Manual adjustment:**
+- Approved bonus/penalty semantics are preserved (see §19.8).
+- No new numeric formula or default is invented.
+
+**Stability:**
+- Competition periods remain authoritative boundaries for competition facts.
+- Later source facts do **not** silently rewrite a CLOSED period.
 
 ---
 

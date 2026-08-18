@@ -1,5 +1,112 @@
 # CHANGELOG
 
+## 2026-08-18 — V0.4 Database Design Approval
+
+Applied:
+- Formally accepted the V0.4 Database Design 50-table final baseline after the completed 08 → 08B → 08C → 08D → 08E review/fix chain.
+
+Preserved:
+- `OI-001`, `OI-003`, `OI-004`, `OI-005`, and `OI-015` remain open.
+- No Flyway migration, JPA entity, or application source was created or changed.
+
+Status:
+- Gate: `V0.4_DATABASE_DESIGN_ACCEPTED`.
+- V0.4 Database Design: `Accepted`.
+- Database implementation: Not Started.
+
+Report:
+- `docs/reports/2026-08-18-V0.4-DATABASE-DESIGN-APPROVAL.md`
+
+---
+
+## 2026-08-18 — V0.4 Database Design Final Correction Pass
+
+Applied:
+- Corrected `BD-V04-009` Quiz ranking: highest valid final graded result ranks by raw score, independent of PASS/FAIL and Competition.
+- Added Competition-owned `comp_quiz_source_selections`; one canonical highest-PASS Quiz source per period/user/test and one associated contribution.
+- Converted assignment effective ranges to `DATETIME(3)` half-open intervals for exact `comp_periods.ends_at` attribution.
+- Finalized immutable Quiz snapshot with `question_type_snapshot` and nullable/SET NULL option trace FK.
+- Removed stored Weekly lifecycle status; lifecycle is derived from instant boundaries and non-overlap is application-enforced.
+- Reconciled MySQL CHECK syntax, Manual source uniqueness/formula wording, Resolution parent XOR, common option timestamps, ERDs, and normalization source.
+
+Status:
+- Gate: `V0.4_DATABASE_DESIGN_FINAL_REVIEW_READY`.
+- V0.4 Database Design: `Review Ready` — NOT Accepted.
+- Final table count: 50.
+- No Flyway, JPA, backend/API, or frontend implementation created.
+
+Report:
+- `docs/reports/2026-08-18-V0.4-DATABASE-DESIGN-FINAL-CORRECTIONS.md`
+
+---
+
+## 2026-08-18 — V0.4 Database Design Review Findings Applied
+
+Applied:
+- Applied Database Design Review Corrections, Business Clarification Change-Control, Schema Consistency Audit, and Traceability Update to `docs/v0.4/DATABASE-DESIGN.md`.
+- Applied Owner Clarification 1A (Competition Unit Attribution): `comp_member_attributions` table introduced; period-end attribution; UNIQUE(period_id, account_id); no overlap query; closed-period stable; unit aggregation from unique attributed members.
+- Applied Owner Clarification 2A (Quiz/Weekly Source Semantics): PASS-only Quiz result may produce competition contribution; correct-only Weekly result may produce competition contribution; `is_competition_eligible` removed from Quiz/Weekly modules; Competition module owns eligibility derivation.
+- Added `handbook_article_media` table for Handbook image/video support.
+- Added `quiz_attempt_question_options` table for immutable per-attempt option snapshot; `quiz_attempt_answers` now references snapshot options.
+- Removed `user_classifications` table; classification is inline CHECK-constrained `VARCHAR(20)` on `accounts`.
+- Removed `ABANDONED` from Quiz attempt status (unsourced).
+- Removed `is_competition_eligible` from `quiz_results` and `weekly_submissions`.
+- Fixed `comp_criteria.weight` — no DEFAULT 1.0000 (deferred numeric default).
+- Fixed `invitations.code_hash` to `BINARY(32)` SHA-256 digest (not BCrypt).
+- Fixed Weekly lifecycle — `period_opens_at`/`period_closes_at` authoritative; `period_status` derived; no ISO-8601 assumption; no configurable `reveal_after_close`.
+- Fixed `comp_policies` policy immutability documentation.
+- Fixed `comp_contributions` source uniqueness — UNIQUE(period_id, quiz_result_id) and UNIQUE(period_id, weekly_submission_id).
+- Fixed Quiz active-attempt DB guard — generated `active_guard` column + UNIQUE constraint.
+- Fixed HCM today query to use `:businessDate` application parameter.
+- Added `comp_member_attributions` to Flyway wave 15.
+- Updated ERDs, FK catalog, Index catalog, Query scenario validation, Delete/Update scenarios, Concurrency invariants, Normalization review, Security review, Decision Traceability.
+- Updated `docs/v0.1/BUSINESS-REQUIREMENTS.md` §19.12 and §19.13 with Owner Clarifications.
+- Updated `docs/v0.2/FUNCTIONAL-SPECIFICATION.md` §25.3 with clarification applications.
+- Updated `docs/TRACEABILITY-MATRIX.md` with 49-table count, Owner Clarification rows, updated requirement-to-DB mappings.
+- Updated `docs/PROJECT-STATUS.md` to reflect findings applied and 49-table count.
+- Created `docs/reports/2026-08-18-V0.4-DATABASE-DESIGN-REVIEW-FIXES.md`.
+
+Final table count: **49** tables (was 47: +3 added, -1 removed).
+
+Preserved:
+- `OI-001`, `OI-003`, `OI-004`, `OI-005`, `OI-015` remain open.
+- No Flyway migration created. No JPA entity created. No application source changed.
+- V0.4 Database Design remains `Review Ready` — NOT Accepted.
+- V0.3 System Design architecture remains `Accepted` and unchanged.
+- Technology Baseline and all ADRs unchanged.
+
+Status:
+- V0.4 Database Design: `Review Ready` — Review Findings Applied 2026-08-18. Pending Project Owner / System Analyst approval.
+- Next: Review corrected V0.4 Database Design before creating Flyway migrations or JPA entities.
+
+Report:
+- `docs/reports/2026-08-18-V0.4-DATABASE-DESIGN-REVIEW-FIXES.md`
+
+---
+
+## 2026-08-18 — V0.4 Database Design Review Ready
+
+Applied:
+- Created `docs/v0.4/DATABASE-DESIGN.md` — Physical Data Model Design; 47 physical tables across 14 modules; ERDs (4 diagrams); complete column dictionary; FK/constraint catalog; index catalog; query scenario validation; delete/update scenario validation; concurrency invariants; Flyway implementation order; all 10 BD decisions reflected.
+- Updated `docs/TRACEABILITY-MATRIX.md` — DB column populated with physical table names for all 74 functional requirements; group rows updated.
+- Updated `docs/PROJECT-STATUS.md` — current gate updated to `V0.4_DATABASE_DESIGN_REVIEW_READY`; V0.4 Database Design artifact row updated to Review Ready.
+
+Preserved:
+- `OI-001`, `OI-003`, `OI-004`, `OI-005`, `OI-015` remain open.
+- No Flyway migration created. No JPA entity created. No application source changed.
+- No numeric defaults invented for deferred values (invitation expiry, quiz attempt limit, competition weights, weekly timezone boundary).
+- Technology Baseline, all ADRs, V0.5 UI baseline unchanged.
+
+Status:
+- Current gate: `V0.4_DATABASE_DESIGN_REVIEW_READY`.
+- V0.4 Database Design: `Review Ready` — pending Project Owner approval before implementation.
+- Next: Review and approve V0.4 Database Design before creating Flyway migrations or JPA entities.
+
+Report:
+- `docs/reports/2026-08-18-V0.4-DATABASE-DESIGN-DRAFT.md`
+
+---
+
 ## 2026-08-18 — V0.4 Business Decisions Applied
 
 Applied:

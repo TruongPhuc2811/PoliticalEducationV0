@@ -2,9 +2,11 @@
 
 **Project:** Hệ thống Giáo dục Chính trị
 **Updated:** 2026-08-18
-**Current gate:** `V0.3_SYSTEM_DESIGN_ACCEPTED`
+**Current gate:** `V0.4_DATABASE_DESIGN_ACCEPTED`
 **V0.4 Business Decisions:** Approved/Applied — 2026-08-18
-**V0.4 Readiness:** READY TO START
+**V0.4 Owner Clarifications:** Applied — 2026-08-18 (Clarification 1A: Competition Unit Attribution; Clarification 2A: Quiz/Weekly Source Semantics)
+**V0.4 Database Design Review Findings:** Final Correction Pass Applied — 2026-08-18 (System Analyst gate review round 2)
+**V0.4 Database Design:** Accepted — 2026-08-18 (50-table final baseline; Project Owner / System Analyst final review PASS)
 
 ## Milestones
 
@@ -27,7 +29,7 @@
 | UI Reporting Acceptance | PASS | Desktop/mobile visual QA PASS; two evidenced MEDIUM issues fixed; no BLOCKER/HIGH remains; gate stays Review Ready |
 | P0 UI prototype tests | Validated | Six prototype flows PASS on desktop and mobile Chromium (12/12); not final business E2E |
 | V0.3 System Design | Accepted | Architecture baseline with 14 module boundaries, ADR-004 server-session auth, `/api/v1`, ProblemDetail, storage/integration/runtime/security design; all OI preserved; V0.4 remains partially blocked |
-| V0.4 Database Design | Not Started | All physical-model blockers resolved; V0.4 Readiness = READY TO START. Do not start without Prompt 08. |
+| V0.4 Database Design | Accepted | 50 physical tables; formal approval completed after the 08 → 08B → 08C → 08D → 08E review/fix chain. Database implementation is Not Started. |
 | V0.4 Business Decisions | Approved/Applied | 10/10 Owner decisions applied 2026-08-18; OI-002/006-014 resolved; OI-001/003/004/005/015 remain open |
 | V0.5 UI Guideline | Accepted | Current UI/UX implementation baseline; candidate brand values and official organizational assets remain Pending and are not promoted to final branding |
 | V0.5 UI/UX Specification | Accepted — scope/index | References the Accepted normative baseline and records validated P0/pending boundaries without duplicating the guideline |
@@ -63,12 +65,12 @@
 
 ## Next recommended Codex task
 
-**Start V0.4 Database Design** — all physical-model blockers have been resolved by Project Owner decisions. V0.4 Readiness = READY TO START.
+**Implement approved database baseline** — prepare Flyway migrations and the JPA persistence model under a separate implementation task. Database implementation is Not Started.
 
 ## Version gates
 
-- **V0.4 Readiness = READY TO START** — Owner decisions applied; no physical-model blocker remains. V0.4 Database Design may now begin (Prompt 08).
-- Do not implement final DB schema before V0.4 Database Design is approved by Project Owner.
+- **V0.4_DATABASE_DESIGN_ACCEPTED** — V0.4 Database Design formally accepted 2026-08-18; 50 physical tables; Project Owner / System Analyst final review PASS.
+- Database implementation is Not Started. Prepare final DB schema (Flyway migrations and JPA entities) only under a separate implementation task.
 - V0.3 acceptance does not close `OI-*` or approve physical schema; V0.4 Owner decisions (2026-08-18) have now resolved the business model blockers.
 - Remaining open OIs (`OI-001`, `OI-003`, `OI-004`, `OI-005`, `OI-015`) do not block V0.4 Database Design; they block external integration, production, seed, upload validation and preview implementation respectively.
 - Do not claim official organizational branding or final visual identity from V0.5 baseline acceptance; candidate/Pending assets remain controlled decisions.
