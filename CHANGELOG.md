@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## 2026-08-19 — V1 Registration Prerequisites Static Approval
+
+Accepted:
+- `V1_REGISTRATION_PREREQUISITES_STATIC_ACCEPTED`: ADR-005 password encoding strategy and minimal registration entity construction/mutation APIs.
+- JPA mapping delta remains zero; Repository source and V001 remain unchanged.
+
+Status:
+- The Registration Use Case is unblocked for implementation; it is not implemented by this approval.
+- MySQL runtime validation remains pending because no safe test database is available.
+
+Report:
+- `docs/reports/2026-08-19-V1-REGISTRATION-PREREQUISITES-STATIC-APPROVAL.md`
+
+---
+
 ## 2026-08-19 — V1 Registration Prerequisite Patch
 
 Applied:
@@ -13,8 +28,8 @@ Preserved:
 - MySQL persistence runtime validation remains unavailable because no safe test database is available.
 
 Status:
-- Registration prerequisites: `Review Ready`.
-- Registration use case: blocked pending prerequisite review; not implemented.
+- Superseded by `V1_REGISTRATION_PREREQUISITES_STATIC_ACCEPTED`.
+- Registration use case: not implemented.
 
 Report:
 - `docs/reports/2026-08-19-V1-REGISTRATION-PREREQUISITE-PATCH.md`
