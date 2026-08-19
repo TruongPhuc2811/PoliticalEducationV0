@@ -35,6 +35,8 @@
 | V0.4 Flyway Baseline | Static Accepted / Runtime Unverified | `V001__v04_accepted_physical_baseline.sql` implements the approved 50-table MySQL 8.4 DDL; safe MySQL execution remains unverified. |
 | V0.4 JPA Persistence Model | Static Accepted / Runtime Unverified | 50 exact ID-first entity mappings and corrected static audit evidence accepted; persistence integration/runtime validation and repository/business implementation are Not Started. |
 | V0.4 Repository Foundation | Static Accepted / Runtime Unverified | 50 module-owned repositories and all custom-query semantics are statically accepted; no service, API, schema, or entity change. Safe MySQL repository integration remains unavailable. |
+| Registration prerequisites | Review Ready | PasswordEncoder decision/bean and minimal registration entity APIs are implemented; registration transaction remains unimplemented. |
+| Registration Use Case | Blocked pending prerequisite approval / Not Implemented | Requires System Analyst review of the prerequisite patch before retrying the atomic registration use case. |
 | Service / Use-case Layer | Not Started | No application-service or use-case implementation has been created. |
 | REST API | Not Started | No controller, API contract, or endpoint implementation has been created. |
 | V0.4 Business Decisions | Approved/Applied | 10/10 Owner decisions applied 2026-08-18; OI-002/006-014 resolved; OI-001/003/004/005/015 remain open |
@@ -72,7 +74,7 @@
 
 ## Next recommended Codex task
 
-**Checkpoint Repository Foundation baseline.**
+**System Analyst review of registration prerequisites, then retry V1 atomic registration use case.**
 
 ## Version gates
 

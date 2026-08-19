@@ -53,4 +53,58 @@ public class Account {
 
     protected Account() {
     }
+
+    public static Account registeredUser(
+            String username,
+            String passwordHash,
+            String displayName,
+            LocalDateTime createdAt,
+            LocalDateTime updatedAt) {
+        Account account = new Account();
+        account.username = username;
+        account.passwordHash = passwordHash;
+        account.role = SystemRole.USER;
+        account.displayName = displayName;
+        account.classification = null;
+        account.isActive = true;
+        account.createdAt = createdAt;
+        account.updatedAt = updatedAt;
+        return account;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public SystemRole getRole() {
+        return role;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public AccountClassification getClassification() {
+        return classification;
+    }
+
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
 }

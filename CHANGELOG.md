@@ -1,5 +1,26 @@
 # CHANGELOG
 
+## 2026-08-19 — V1 Registration Prerequisite Patch
+
+Applied:
+- Accepted `ADR-005` to use Spring Security's delegating `PasswordEncoder`; new encodings use bcrypt and include an algorithm identifier.
+- Added the single `PasswordEncoder` bean and minimal entity construction, consumption, and read APIs required by the future atomic registration use case.
+- Added focused unit tests for password encoding and entity APIs.
+
+Preserved:
+- No registration service, login/session wiring, REST API, frontend, repository, Flyway, or schema mapping change.
+- Raw passwords and raw invitation codes are not persisted or logged.
+- MySQL persistence runtime validation remains unavailable because no safe test database is available.
+
+Status:
+- Registration prerequisites: `Review Ready`.
+- Registration use case: blocked pending prerequisite review; not implemented.
+
+Report:
+- `docs/reports/2026-08-19-V1-REGISTRATION-PREREQUISITE-PATCH.md`
+
+---
+
 ## 2026-08-19 — V0.4 Repository Foundation
 
 Applied:

@@ -49,4 +49,61 @@ public class Invitation {
 
     protected Invitation() {
     }
+
+    public static Invitation issued(
+            byte[] codeHash,
+            Long orgUnitId,
+            Long issuerAccountId,
+            InvitationStatus status,
+            LocalDateTime expiresAt,
+            LocalDateTime createdAt,
+            LocalDateTime updatedAt) {
+        Invitation invitation = new Invitation();
+        invitation.codeHash = codeHash.clone();
+        invitation.orgUnitId = orgUnitId;
+        invitation.issuerAccountId = issuerAccountId;
+        invitation.status = status;
+        invitation.expiresAt = expiresAt;
+        invitation.createdAt = createdAt;
+        invitation.updatedAt = updatedAt;
+        return invitation;
+    }
+
+    public void consume(Long accountId, LocalDateTime consumedAt) {
+        status = InvitationStatus.CONSUMED;
+        consumedByAccountId = accountId;
+        this.consumedAt = consumedAt;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public byte[] getCodeHash() {
+        return codeHash.clone();
+    }
+
+    public Long getOrgUnitId() {
+        return orgUnitId;
+    }
+
+    public Long getIssuerAccountId() {
+        return issuerAccountId;
+    }
+
+    public InvitationStatus getStatus() {
+        return status;
+    }
+
+    public LocalDateTime getExpiresAt() {
+        return expiresAt;
+    }
+
+    public Long getConsumedByAccountId() {
+        return consumedByAccountId;
+    }
+
+    public LocalDateTime getConsumedAt() {
+        return consumedAt;
+    }
 }

@@ -36,4 +36,35 @@ public class UserAssignmentHistory {
 
     protected UserAssignmentHistory() {
     }
+
+    public static UserAssignmentHistory initialAssignment(
+            Long accountId, Long orgUnitId, LocalDateTime effectiveFrom, LocalDateTime createdAt) {
+        UserAssignmentHistory history = new UserAssignmentHistory();
+        history.accountId = accountId;
+        history.orgUnitId = orgUnitId;
+        history.effectiveFrom = effectiveFrom;
+        history.effectiveTo = null;
+        history.createdAt = createdAt;
+        return history;
+    }
+
+    public Long getAccountId() {
+        return accountId;
+    }
+
+    public Long getOrgUnitId() {
+        return orgUnitId;
+    }
+
+    public LocalDateTime getEffectiveFrom() {
+        return effectiveFrom;
+    }
+
+    public LocalDateTime getEffectiveTo() {
+        return effectiveTo;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
 }

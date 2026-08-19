@@ -33,4 +33,30 @@ public class UserAssignment {
 
     protected UserAssignment() {
     }
+
+    public static UserAssignment initialAssignment(
+            Long accountId, Long orgUnitId, LocalDateTime effectiveFrom, LocalDateTime createdAt) {
+        UserAssignment assignment = new UserAssignment();
+        assignment.accountId = accountId;
+        assignment.orgUnitId = orgUnitId;
+        assignment.effectiveFrom = effectiveFrom;
+        assignment.createdAt = createdAt;
+        return assignment;
+    }
+
+    public Long getAccountId() {
+        return accountId;
+    }
+
+    public Long getOrgUnitId() {
+        return orgUnitId;
+    }
+
+    public LocalDateTime getEffectiveFrom() {
+        return effectiveFrom;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
 }

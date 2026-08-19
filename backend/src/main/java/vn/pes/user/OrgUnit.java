@@ -40,4 +40,12 @@ public class OrgUnit {
 
     protected OrgUnit() {
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public OrgUnitType getUnitType() {
+        return unitType;
+    }
 }
