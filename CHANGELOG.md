@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 2026-08-19 — V0.4 JPA Persistence Model Static Approval
+
+Applied:
+- Formally accepted the 50-entity JPA persistence model after exact V001 reconciliation and corrected audit evidence.
+
+Status:
+- JPA/MySQL runtime validation remains pending; no Repository, Service, or API implementation was created.
+
+---
+
 ## 2026-08-19 — V0.4 Flyway MySQL 8.4 Compatibility Patch
 
 Applied:

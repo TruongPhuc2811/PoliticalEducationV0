@@ -1,13 +1,14 @@
 # PROJECT STATUS
 
 **Project:** Hệ thống Giáo dục Chính trị
-**Updated:** 2026-08-18
-**Current gate:** `V0.4_DATABASE_DESIGN_ACCEPTED`
+**Updated:** 2026-08-19
+**Current gate:** `V0.4_JPA_PERSISTENCE_MODEL_STATIC_ACCEPTED`
 **V0.4 Business Decisions:** Approved/Applied — 2026-08-18
 **V0.4 Owner Clarifications:** Applied — 2026-08-18 (Clarification 1A: Competition Unit Attribution; Clarification 2A: Quiz/Weekly Source Semantics)
 **V0.4 Database Design Review Findings:** Final Correction Pass Applied — 2026-08-18 (System Analyst gate review round 2)
 **V0.4 Database Design:** Accepted — 2026-08-18 (50-table final baseline; Project Owner / System Analyst final review PASS)
-**V0.4 Flyway Baseline:** Review Ready — 2026-08-19 (MySQL 8.4 CHECK/FK compatibility patch applied; 50-table baseline unchanged; pending System Analyst review)
+**V0.4 Flyway Baseline:** Static Accepted / Runtime Unverified — 2026-08-19 (MySQL 8.4 CHECK/FK compatibility patch applied; 50-table baseline unchanged)
+**V0.4 JPA Persistence Model:** Static Accepted / Runtime Unverified — 2026-08-19 (50 ID-first entities; source-driven static audit PASS; safe MySQL test DB unavailable)
 
 ## Milestones
 
@@ -31,7 +32,8 @@
 | P0 UI prototype tests | Validated | Six prototype flows PASS on desktop and mobile Chromium (12/12); not final business E2E |
 | V0.3 System Design | Accepted | Architecture baseline with 14 module boundaries, ADR-004 server-session auth, `/api/v1`, ProblemDetail, storage/integration/runtime/security design; all OI preserved; V0.4 remains partially blocked |
 | V0.4 Database Design | Accepted | 50 physical tables; formal approval completed after the 08 → 08B → 08C → 08D → 08E review/fix chain. Database implementation is Not Started. |
-| V0.4 Flyway Baseline | Review Ready | `V001__v04_accepted_physical_baseline.sql` implements the approved 50-table MySQL 8.4 DDL, constraints, and indexes; 2026-08-19 CHECK/FK compatibility patch preserves the three DB CHECK invariants. No JPA persistence implementation. |
+| V0.4 Flyway Baseline | Static Accepted / Runtime Unverified | `V001__v04_accepted_physical_baseline.sql` implements the approved 50-table MySQL 8.4 DDL; safe MySQL execution remains unverified. |
+| V0.4 JPA Persistence Model | Static Accepted / Runtime Unverified | 50 exact ID-first entity mappings and corrected static audit evidence accepted; persistence integration/runtime validation and repository/business implementation are Not Started. |
 | V0.4 Business Decisions | Approved/Applied | 10/10 Owner decisions applied 2026-08-18; OI-002/006-014 resolved; OI-001/003/004/005/015 remain open |
 | V0.5 UI Guideline | Accepted | Current UI/UX implementation baseline; candidate brand values and official organizational assets remain Pending and are not promoted to final branding |
 | V0.5 UI/UX Specification | Accepted — scope/index | References the Accepted normative baseline and records validated P0/pending boundaries without duplicating the guideline |
