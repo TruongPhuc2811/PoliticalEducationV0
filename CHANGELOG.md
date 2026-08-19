@@ -1,5 +1,37 @@
 # CHANGELOG
 
+## 2026-08-19 — V1 Registration Use Case Static Approval
+
+Accepted:
+- `V1_REGISTRATION_USE_CASE_STATIC_ACCEPTED`: transactional invitation-based registration with SHA-256 bearer digest and pessimistic locked lookup.
+- USER/null-classification account creation, invitation-scoped initial assignment/history, and atomic invitation consumption design.
+- 18 unit tests pass.
+
+Preserved:
+- MySQL registration, lock, and rollback behavior remains unverified.
+- Login, REST registration, and frontend integration are not implemented.
+
+Report:
+- `docs/reports/2026-08-19-V1-REGISTRATION-USE-CASE-STATIC-APPROVAL.md`
+
+---
+
+## 2026-08-19 — V1 Atomic Registration Use Case
+
+Applied:
+- Implemented Auth-owned atomic self-registration with SHA-256 invitation digest and locked single-use invitation lookup.
+- Forced USER-only registration with null classification, Tiểu đội-scoped initial assignment/history, and invitation consumption in one transaction.
+- Added focused unit tests.
+
+Preserved:
+- No REST, login/session, frontend, repository, entity, Flyway, or V001 changes.
+- MySQL concurrency and rollback validation remain runtime-unverified.
+
+Report:
+- `docs/reports/2026-08-19-V1-REGISTRATION-USE-CASE-IMPLEMENTATION.md`
+
+---
+
 ## 2026-08-19 — V1 Registration Prerequisites Static Approval
 
 Accepted:

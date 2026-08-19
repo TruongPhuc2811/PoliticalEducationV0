@@ -2,7 +2,7 @@
 
 **Project:** Hệ thống Giáo dục Chính trị
 **Updated:** 2026-08-19
-**Current gate:** `V1_REGISTRATION_PREREQUISITES_STATIC_ACCEPTED`
+**Current gate:** `V1_REGISTRATION_USE_CASE_STATIC_ACCEPTED`
 **V0.4 Business Decisions:** Approved/Applied — 2026-08-18
 **V0.4 Owner Clarifications:** Applied — 2026-08-18 (Clarification 1A: Competition Unit Attribution; Clarification 2A: Quiz/Weekly Source Semantics)
 **V0.4 Database Design Review Findings:** Final Correction Pass Applied — 2026-08-18 (System Analyst gate review round 2)
@@ -36,7 +36,7 @@
 | V0.4 JPA Persistence Model | Static Accepted / Runtime Unverified | 50 exact ID-first entity mappings and corrected static audit evidence accepted; persistence integration/runtime validation and repository/business implementation are Not Started. |
 | V0.4 Repository Foundation | Static Accepted / Runtime Unverified | 50 module-owned repositories and all custom-query semantics are statically accepted; no service, API, schema, or entity change. Safe MySQL repository integration remains unavailable. |
 | Registration Prerequisites | Static Accepted | `V1_REGISTRATION_PREREQUISITES_STATIC_ACCEPTED`: ADR-005, one delegating PasswordEncoder bean, and minimal registration entity APIs accepted; persisted/JPA mapping delta remains zero. |
-| Registration Use Case | Not Implemented / Ready to Start | Prerequisites are statically accepted; the atomic registration transaction has not been implemented. |
+| Registration Use Case | Static Accepted / Runtime Unverified | `V1_REGISTRATION_USE_CASE_STATIC_ACCEPTED`: Auth-owned atomic self-registration is statically/unit accepted; MySQL registration, lock, and rollback behavior remains unverified. |
 | Service / Use-case Layer | Not Started | No application-service or use-case implementation has been created. |
 | REST API | Not Started | No controller, API contract, or endpoint implementation has been created. |
 | V0.4 Business Decisions | Approved/Applied | 10/10 Owner decisions applied 2026-08-18; OI-002/006-014 resolved; OI-001/003/004/005/015 remain open |
@@ -74,7 +74,7 @@
 
 ## Next recommended Codex task
 
-**Checkpoint Registration Prerequisites baseline, then retry Task 11A V1 atomic registration use case.**
+**Checkpoint V1 Registration Use Case baseline.**
 
 ## Version gates
 
@@ -83,6 +83,8 @@
 - **V0.4_JPA_PERSISTENCE_MODEL_STATIC_ACCEPTED** — 50 exact entity mappings are static accepted; runtime MySQL validation remains unverified.
 - **V0.4_REPOSITORY_FOUNDATION_STATIC_ACCEPTED** — 50 module-owned repositories and their query semantics are statically accepted; Flyway/MySQL, JPA/MySQL, and repository/MySQL runtime integration remain unverified because a safe test database is unavailable.
 - **V1_REGISTRATION_PREREQUISITES_STATIC_ACCEPTED** — ADR-005, one delegating `PasswordEncoder` bean, and minimal Account/assignment/history/invitation/OrgUnit APIs are statically accepted. No registration use case, REST API, or frontend implementation is included; MySQL runtime validation remains unavailable.
+- **V1_REGISTRATION_USE_CASE_REVIEW_READY** — atomic Auth-owned self-registration is statically/unit-test review ready. MySQL registration, pessimistic-lock, and rollback validation remain unverified because a safe test database is unavailable.
+- **V1_REGISTRATION_USE_CASE_STATIC_ACCEPTED** — atomic Auth-owned self-registration implementation and unit tests are accepted. This is not MySQL runtime acceptance; registration integration, pessimistic locking, and rollback remain unverified because a safe test database is unavailable.
 - V0.3 acceptance does not close `OI-*` or approve physical schema; V0.4 Owner decisions (2026-08-18) have now resolved the business model blockers.
 - Remaining open OIs (`OI-001`, `OI-003`, `OI-004`, `OI-005`, `OI-015`) do not block V0.4 Database Design; they block external integration, production, seed, upload validation and preview implementation respectively.
 - Do not claim official organizational branding or final visual identity from V0.5 baseline acceptance; candidate/Pending assets remain controlled decisions.

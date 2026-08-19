@@ -57,8 +57,8 @@ V0.3 đã Accepted module ownership và **conceptual API domain boundary** với
 | Requirement ID | Functional Spec / Use Case | Screen | API | DB | Test | Status / Notes |
 |---|---|---|---|---|---|---|
 | `USR-001` | `UC-AUTH-001` | `SCR-AUTH-001` | TBD | `accounts` | TBD | Review Ready |
-| `USR-002` | `UC-AUTH-002` | `SCR-AUTH-002` | TBD | `accounts`, `invitations` | Prerequisite unit tests: PasswordEncoder and Account construction; registration transaction TBD | `V1_REGISTRATION_PREREQUISITES_STATIC_ACCEPTED`; ADR-005 and prerequisites accepted; use case not implemented |
-| `USR-003` | `UC-AUTH-002`, `UC-ADM-INV-001` | `SCR-AUTH-002`, `SCR-ADM-003` | TBD | `invitations`, `user_assignments`, `user_assignment_history` | Prerequisite unit tests: invitation consumption and assignment construction; registration transaction TBD | `OI-006` **Resolved `BD-V04-006`** — scoped single-use invitation tied to Tiểu đội; `V1_REGISTRATION_PREREQUISITES_STATIC_ACCEPTED` |
+| `USR-002` | `UC-AUTH-002` | `SCR-AUTH-002` | TBD | `accounts`, `invitations` | `SelfRegistrationServiceTest`; registration application use case statically/unit accepted | `V1_REGISTRATION_USE_CASE_STATIC_ACCEPTED`; ADR-005 prerequisite retained |
+| `USR-003` | `UC-AUTH-002`, `UC-ADM-INV-001` | `SCR-AUTH-002`, `SCR-ADM-003` | TBD | `invitations`, `user_assignments`, `user_assignment_history` | `SelfRegistrationServiceTest`; locked atomic consumption orchestration covered by unit tests | `OI-006` **Resolved `BD-V04-006`** — scoped single-use invitation tied to Tiểu đội; `V1_REGISTRATION_USE_CASE_STATIC_ACCEPTED` |
 | `USR-004` | `UC-AUTH-001`, `UC-ADM-USER-001` | `SCR-AUTH-001`, `SCR-ADM-002` | TBD | `accounts.classification`, `positions`, `ranks` | TBD | Review Ready; fixed CAN_BO/CHIEN_SI classification |
 | `USR-005` | FS §6.1 Technology/resource scale constraint | N/A | TBD | — (NFR; no DB table) | TBD | No standalone UC |
 | `HAN-001` | `UC-ADM-001` | `SCR-ADM-004` | TBD | `handbook_categories` | TBD | Review Ready |
