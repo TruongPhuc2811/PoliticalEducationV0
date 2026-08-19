@@ -9,6 +9,7 @@
 
 **Approval status:** `V0.4_DATABASE_DESIGN_ACCEPTED`
 **Approved date:** 2026-08-18
+**Accepted Technical Compatibility Amendment:** 2026-08-19 — MySQL 8.4 CHECK/FK referential-action compatibility
 
 > **Approval gate:** This document is Accepted following the completed 08 → 08B → 08C → 08D → 08E review/fix chain and the Project Owner / System Analyst final review PASS. Flyway migrations and JPA entities remain separate implementation work; this approval does not create or approve implementation artifacts.
 
@@ -1622,8 +1623,8 @@ erDiagram
 | `handbook_article_media.file_metadata_id` | `file_metadata.id` | SET NULL | CASCADE | Optional local-media reference; external media remains valid |
 | `resolutions.created_by` | `accounts.id` | SET NULL | CASCADE | — |
 | `resolution_topics.resolution_id` | `resolutions.id` | RESTRICT | CASCADE | Topic cannot exist without resolution |
-| `resolution_documents.resolution_id` | `resolutions.id` | RESTRICT | CASCADE | — |
-| `resolution_documents.topic_id` | `resolution_topics.id` | RESTRICT | CASCADE | — |
+| `resolution_documents.resolution_id` | `resolutions.id` | RESTRICT / NO ACTION (MySQL default) | RESTRICT / NO ACTION (MySQL default) | CHECK-participating FK; explicit actions omitted for MySQL 8.4 compatibility |
+| `resolution_documents.topic_id` | `resolution_topics.id` | RESTRICT / NO ACTION (MySQL default) | RESTRICT / NO ACTION (MySQL default) | CHECK-participating FK; explicit actions omitted for MySQL 8.4 compatibility |
 | `resolution_documents.file_metadata_id` | `file_metadata.id` | RESTRICT | CASCADE | Do not delete file while document references it |
 | `news_articles.category_id` | `news_categories.id` | RESTRICT | CASCADE | — |
 | `news_articles.thumbnail_file_id` | `file_metadata.id` | SET NULL | CASCADE | — |
@@ -1665,9 +1666,9 @@ erDiagram
 | `comp_quiz_source_selections.account_id` | `accounts.id` | RESTRICT | CASCADE | Selected result owner |
 | `comp_quiz_source_selections.quiz_config_id` | `quiz_configs.id` | RESTRICT | CASCADE | Quiz/Test identity |
 | `comp_quiz_source_selections.selected_quiz_result_id` | `quiz_results.id` | RESTRICT | CASCADE | Canonical final PASS result |
-| `comp_contributions.quiz_source_selection_id` | `comp_quiz_source_selections.id` | RESTRICT | CASCADE | Canonical Quiz source, not a raw result |
-| `comp_contributions.weekly_submission_id` | `weekly_submissions.id` | RESTRICT | CASCADE | Cross-module; preserve source fact |
-| `comp_contributions.manual_adjustment_id` | `comp_manual_adjustments.id` | RESTRICT | CASCADE | — |
+| `comp_contributions.quiz_source_selection_id` | `comp_quiz_source_selections.id` | RESTRICT / NO ACTION (MySQL default) | RESTRICT / NO ACTION (MySQL default) | Canonical Quiz source; CHECK-participating FK compatibility exception |
+| `comp_contributions.weekly_submission_id` | `weekly_submissions.id` | RESTRICT / NO ACTION (MySQL default) | RESTRICT / NO ACTION (MySQL default) | Cross-module source fact; CHECK-participating FK compatibility exception |
+| `comp_contributions.manual_adjustment_id` | `comp_manual_adjustments.id` | RESTRICT / NO ACTION (MySQL default) | RESTRICT / NO ACTION (MySQL default) | CHECK-participating FK compatibility exception |
 | `comp_manual_adjustments.period_id` | `comp_periods.id` | RESTRICT | CASCADE | — |
 | `comp_manual_adjustments.account_id` | `accounts.id` | RESTRICT | CASCADE | — |
 | `comp_manual_adjustments.issued_by_account_id` | `accounts.id` | RESTRICT | CASCADE | Actor must be preserved |
@@ -1685,6 +1686,8 @@ erDiagram
 | `comp_member_attributions.source_assignment_history_id` | `user_assignment_history.id` | SET NULL | CASCADE | Trace reference; null does not invalidate attribution |
 | `file_metadata.created_by` | `accounts.id` | SET NULL | CASCADE | — |
 | `learning_phases.school_year_id` | `school_years.id` | RESTRICT | CASCADE | — |
+
+**MySQL 8.4 compatibility exception (Accepted Technical Compatibility Amendment — 2026-08-19):** FK columns participating in DB CHECK constraints omit explicit referential-action clauses. InnoDB default `NO ACTION` preserves RESTRICT-style delete safety. Parent surrogate `BIGINT AUTO_INCREMENT` IDs are immutable; therefore `ON UPDATE CASCADE` is not required. This narrowly applies only to `resolution_documents.resolution_id`, `resolution_documents.topic_id`, and the three checked source FKs in `comp_contributions`; all other Accepted FK actions remain unchanged.
 
 ### 11.2 Business Constraint Catalog
 

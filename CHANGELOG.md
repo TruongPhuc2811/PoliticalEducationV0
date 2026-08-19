@@ -1,5 +1,34 @@
 # CHANGELOG
 
+## 2026-08-19 — V0.4 Flyway MySQL 8.4 Compatibility Patch
+
+Applied:
+- Removed explicit FK actions only from the five CHECK-participating FKs in `resolution_documents` and `comp_contributions`, preserving MySQL 8.4 compatibility and all three accepted relational CHECK invariants.
+
+Status:
+- Flyway baseline remains `Review Ready`; 50-table baseline and business semantics are unchanged.
+- No JPA, business/API, frontend, seed, or runtime configuration implementation was created.
+
+Report:
+- `docs/reports/2026-08-19-V0.4-FLYWAY-MYSQL84-COMPATIBILITY-PATCH.md`
+
+---
+
+## 2026-08-18 — V0.4 Flyway Baseline Implementation
+
+Applied:
+- Added `V001__v04_accepted_physical_baseline.sql` with the accepted 50-table MySQL 8.4 physical baseline, including approved constraints, foreign-key actions, indexes, immutable snapshot relationships, and competition integrity guards.
+
+Status:
+- Flyway baseline: `Review Ready` (`V0.4_FLYWAY_BASELINE_REVIEW_READY`).
+- Static SQL validation passed; safe MySQL execution was not run because no dedicated test database was available.
+- No JPA, business/API, frontend, seed, or runtime configuration implementation was created.
+
+Report:
+- `docs/reports/2026-08-18-V0.4-FLYWAY-BASELINE-IMPLEMENTATION.md`
+
+---
+
 ## 2026-08-18 — V0.4 Database Design Approval
 
 Applied:
