@@ -2,7 +2,7 @@
 
 **Project:** Hệ thống Giáo dục Chính trị
 **Updated:** 2026-08-19
-**Current gate:** `V1_REGISTRATION_USE_CASE_STATIC_ACCEPTED`
+**Current gate:** `V1_LOGIN_SESSION_FOUNDATION_STATIC_ACCEPTED`
 **V0.4 Business Decisions:** Approved/Applied — 2026-08-18
 **V0.4 Owner Clarifications:** Applied — 2026-08-18 (Clarification 1A: Competition Unit Attribution; Clarification 2A: Quiz/Weekly Source Semantics)
 **V0.4 Database Design Review Findings:** Final Correction Pass Applied — 2026-08-18 (System Analyst gate review round 2)
@@ -37,6 +37,11 @@
 | V0.4 Repository Foundation | Static Accepted / Runtime Unverified | 50 module-owned repositories and all custom-query semantics are statically accepted; no service, API, schema, or entity change. Safe MySQL repository integration remains unavailable. |
 | Registration Prerequisites | Static Accepted | `V1_REGISTRATION_PREREQUISITES_STATIC_ACCEPTED`: ADR-005, one delegating PasswordEncoder bean, and minimal registration entity APIs accepted; persisted/JPA mapping delta remains zero. |
 | Registration Use Case | Static Accepted / Runtime Unverified | `V1_REGISTRATION_USE_CASE_STATIC_ACCEPTED`: Auth-owned atomic self-registration is statically/unit accepted; MySQL registration, lock, and rollback behavior remains unverified. |
+| Login + Session Authentication Foundation | Static Accepted / Runtime Unverified | `V1_LOGIN_SESSION_FOUNDATION_STATIC_ACCEPTED`: standard `DaoAuthenticationProvider`, username/password account loading, credential erasure, exact role mapping, active-account rejection, server-managed `IF_REQUIRED` session, CSRF, session-fixation configuration, logout, and cookie baseline are statically/unit accepted; HTTP/MySQL runtime validation is unverified. |
+| Login REST Endpoint | Not Started | No login controller or JSON authentication endpoint has been created. |
+| Registration REST Endpoint | Not Started | Registration remains an application use case without a REST endpoint. |
+| Current User Endpoint | Not Started | No authenticated-current-user REST endpoint has been created. |
+| Frontend Auth Integration | Not Started | No frontend authentication integration has been created. |
 | Service / Use-case Layer | Not Started | No application-service or use-case implementation has been created. |
 | REST API | Not Started | No controller, API contract, or endpoint implementation has been created. |
 | V0.4 Business Decisions | Approved/Applied | 10/10 Owner decisions applied 2026-08-18; OI-002/006-014 resolved; OI-001/003/004/005/015 remain open |
@@ -74,7 +79,7 @@
 
 ## Next recommended Codex task
 
-**Checkpoint V1 Registration Use Case baseline.**
+**Checkpoint V1 Login + Session Authentication Foundation baseline.**
 
 ## Version gates
 
@@ -85,6 +90,8 @@
 - **V1_REGISTRATION_PREREQUISITES_STATIC_ACCEPTED** — ADR-005, one delegating `PasswordEncoder` bean, and minimal Account/assignment/history/invitation/OrgUnit APIs are statically accepted. No registration use case, REST API, or frontend implementation is included; MySQL runtime validation remains unavailable.
 - **V1_REGISTRATION_USE_CASE_REVIEW_READY** — atomic Auth-owned self-registration is statically/unit-test review ready. MySQL registration, pessimistic-lock, and rollback validation remain unverified because a safe test database is unavailable.
 - **V1_REGISTRATION_USE_CASE_STATIC_ACCEPTED** — atomic Auth-owned self-registration implementation and unit tests are accepted. This is not MySQL runtime acceptance; registration integration, pessimistic locking, and rollback remain unverified because a safe test database is unavailable.
+- **V1_LOGIN_SESSION_FOUNDATION_REVIEW_READY** — Spring Security login/session foundation is review ready; username/password loading, ADR-005 password verification, exact role authorities, active-account rejection, server-managed sessions, session fixation, CSRF, and logout invalidation are statically/unit verified. HTTP login/session and MySQL authentication integration remain unverified.
+- **V1_LOGIN_SESSION_FOUNDATION_STATIC_ACCEPTED** — V1 Login + Session Authentication Foundation is statically/unit accepted after the standard-provider correction. HTTP session, cookie, and MySQL authentication runtime behavior remain unverified.
 - V0.3 acceptance does not close `OI-*` or approve physical schema; V0.4 Owner decisions (2026-08-18) have now resolved the business model blockers.
 - Remaining open OIs (`OI-001`, `OI-003`, `OI-004`, `OI-005`, `OI-015`) do not block V0.4 Database Design; they block external integration, production, seed, upload validation and preview implementation respectively.
 - Do not claim official organizational branding or final visual identity from V0.5 baseline acceptance; candidate/Pending assets remain controlled decisions.

@@ -1,5 +1,50 @@
 # CHANGELOG
 
+## 2026-08-19 — V1 Login + Session Authentication Foundation Static Approval
+
+Accepted:
+- `V1_LOGIN_SESSION_FOUNDATION_STATIC_ACCEPTED`: the V1 Login + Session Authentication Foundation is statically/unit accepted.
+- Standard `DaoAuthenticationProvider` replaces the custom password provider; `AccountUserDetailsService` loads by username and `CredentialsContainer`/`ProviderManager` erase successful-principal credentials.
+- Exact `USER`, `ADMIN`, and `SUPER_ADMIN` authority mapping, inactive-account rejection, server-managed `IF_REQUIRED` sessions, session-fixation protection, retained CSRF, disabled HTTP Basic/default form login, logout, and secure-cookie baseline are accepted.
+
+Preserved:
+- No JWT/Bearer, persistent DB/Redis session, auth REST endpoint, or frontend auth implementation.
+- `backend/mvnw.cmd test`: 25 tests pass; HTTP session/cookie and MySQL authentication runtime behavior remain unverified.
+
+Report:
+- `docs/reports/2026-08-19-V1-LOGIN-SESSION-FOUNDATION-STATIC-APPROVAL.md`
+
+---
+
+## 2026-08-19 — V1 Standard Authentication Provider Correction
+
+Corrected:
+- Replaced the custom password-authentication provider with Spring Security `DaoAuthenticationProvider` and `ProviderManager`.
+- Made the session principal credential-erasable after standard authentication; no separate principal model remains.
+
+Preserved:
+- Login/session foundation remains Review Ready; no REST/frontend, persistence, registration, or runtime-validation scope was added.
+
+Report:
+- `docs/reports/2026-08-19-V1-LOGIN-SESSION-STANDARD-PROVIDER-PATCH.md`
+
+---
+
+## 2026-08-19 — V1 Login + Session Authentication Foundation
+
+Applied:
+- Implemented Spring Security username/password account authentication with ADR-005 `PasswordEncoder` verification and deterministic `ROLE_SUPER_ADMIN`, `ROLE_ADMIN`, `ROLE_USER` mapping.
+- Added server-managed session configuration with retained CSRF, session-ID rotation on authentication, and logout session invalidation.
+
+Preserved:
+- No JWT, bearer/refresh token, HTTP Basic browser auth, persistent session store, REST auth endpoint, or frontend integration.
+- HTTP and MySQL authentication runtime validation remain pending because no safe test database or login endpoint exists.
+
+Report:
+- `docs/reports/2026-08-19-V1-LOGIN-SESSION-FOUNDATION-IMPLEMENTATION.md`
+
+---
+
 ## 2026-08-19 — V1 Registration Use Case Static Approval
 
 Accepted:

@@ -7,6 +7,12 @@ spring:
     hibernate:
       ddl-auto: validate
 
+server:
+  servlet:
+    session:
+      cookie:
+        secure: true
+
 app:
   file-storage:
     root: ${FILE_STORAGE_ROOT}

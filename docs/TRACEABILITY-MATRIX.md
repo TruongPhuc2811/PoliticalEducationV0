@@ -56,7 +56,7 @@ V0.3 đã Accepted module ownership và **conceptual API domain boundary** với
 
 | Requirement ID | Functional Spec / Use Case | Screen | API | DB | Test | Status / Notes |
 |---|---|---|---|---|---|---|
-| `USR-001` | `UC-AUTH-001` | `SCR-AUTH-001` | TBD | `accounts` | TBD | Review Ready |
+| `USR-001` | `UC-AUTH-001` | `SCR-AUTH-001` | Login API TBD; Spring Security authentication foundation | `accounts` | `DaoAuthenticationProviderTest`, `SecurityConfigTest` | `V1_LOGIN_SESSION_FOUNDATION_STATIC_ACCEPTED`; ADR-004/ADR-005 retained; no REST endpoint |
 | `USR-002` | `UC-AUTH-002` | `SCR-AUTH-002` | TBD | `accounts`, `invitations` | `SelfRegistrationServiceTest`; registration application use case statically/unit accepted | `V1_REGISTRATION_USE_CASE_STATIC_ACCEPTED`; ADR-005 prerequisite retained |
 | `USR-003` | `UC-AUTH-002`, `UC-ADM-INV-001` | `SCR-AUTH-002`, `SCR-ADM-003` | TBD | `invitations`, `user_assignments`, `user_assignment_history` | `SelfRegistrationServiceTest`; locked atomic consumption orchestration covered by unit tests | `OI-006` **Resolved `BD-V04-006`** — scoped single-use invitation tied to Tiểu đội; `V1_REGISTRATION_USE_CASE_STATIC_ACCEPTED` |
 | `USR-004` | `UC-AUTH-001`, `UC-ADM-USER-001` | `SCR-AUTH-001`, `SCR-ADM-002` | TBD | `accounts.classification`, `positions`, `ranks` | TBD | Review Ready; fixed CAN_BO/CHIEN_SI classification |
