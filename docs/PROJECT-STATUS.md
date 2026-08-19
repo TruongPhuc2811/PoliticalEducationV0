@@ -2,7 +2,7 @@
 
 **Project:** Hệ thống Giáo dục Chính trị
 **Updated:** 2026-08-19
-**Current gate:** `V0.4_JPA_PERSISTENCE_MODEL_STATIC_ACCEPTED`
+**Current gate:** `V0.4_REPOSITORY_FOUNDATION_STATIC_ACCEPTED`
 **V0.4 Business Decisions:** Approved/Applied — 2026-08-18
 **V0.4 Owner Clarifications:** Applied — 2026-08-18 (Clarification 1A: Competition Unit Attribution; Clarification 2A: Quiz/Weekly Source Semantics)
 **V0.4 Database Design Review Findings:** Final Correction Pass Applied — 2026-08-18 (System Analyst gate review round 2)
@@ -34,11 +34,14 @@
 | V0.4 Database Design | Accepted | 50 physical tables; formal approval completed after the 08 → 08B → 08C → 08D → 08E review/fix chain. Database implementation is Not Started. |
 | V0.4 Flyway Baseline | Static Accepted / Runtime Unverified | `V001__v04_accepted_physical_baseline.sql` implements the approved 50-table MySQL 8.4 DDL; safe MySQL execution remains unverified. |
 | V0.4 JPA Persistence Model | Static Accepted / Runtime Unverified | 50 exact ID-first entity mappings and corrected static audit evidence accepted; persistence integration/runtime validation and repository/business implementation are Not Started. |
+| V0.4 Repository Foundation | Static Accepted / Runtime Unverified | 50 module-owned repositories and all custom-query semantics are statically accepted; no service, API, schema, or entity change. Safe MySQL repository integration remains unavailable. |
+| Service / Use-case Layer | Not Started | No application-service or use-case implementation has been created. |
+| REST API | Not Started | No controller, API contract, or endpoint implementation has been created. |
 | V0.4 Business Decisions | Approved/Applied | 10/10 Owner decisions applied 2026-08-18; OI-002/006-014 resolved; OI-001/003/004/005/015 remain open |
 | V0.5 UI Guideline | Accepted | Current UI/UX implementation baseline; candidate brand values and official organizational assets remain Pending and are not promoted to final branding |
 | V0.5 UI/UX Specification | Accepted — scope/index | References the Accepted normative baseline and records validated P0/pending boundaries without duplicating the guideline |
 | V0.6 Test & Acceptance | Placeholder | E2E skeleton prepared |
-| V1.0 Baseline | Placeholder | Not started |
+| V1.0 Baseline | Placeholder | Repository foundation Static Accepted / Runtime Unverified; Service/API not started |
 | Backend code shell | Validated | Maven Wrapper test/package PASS on Java 21 |
 | Frontend code shell | Validated | npm lockfile retained; P0 prototype typecheck/build PASS with lazy route chunks and no >500 kB chunk warning |
 | Playwright shell | Validated | Earlier desktop/mobile Chromium shell smoke PASS (4/4); superseded for P0 UI coverage by prototype tests above |
@@ -69,13 +72,14 @@
 
 ## Next recommended Codex task
 
-**System Analyst review of corrected Flyway baseline** — review the MySQL 8.4 CHECK/FK compatibility patch before implementing the JPA persistence model under a separate task.
+**Checkpoint Repository Foundation baseline.**
 
 ## Version gates
 
 - **V0.4_DATABASE_DESIGN_ACCEPTED** — V0.4 Database Design formally accepted 2026-08-18; 50 physical tables; Project Owner / System Analyst final review PASS.
-- **V0.4_FLYWAY_BASELINE_REVIEW_READY** — accepted physical baseline implemented in Flyway as 50-table MySQL 8.4 DDL; static validation PASS; safe MySQL execution not run.
-- Do not implement JPA entities or persistence behavior until the Flyway baseline is reviewed.
+- **V0.4_FLYWAY_BASELINE_STATIC_ACCEPTED** — accepted physical baseline implemented in Flyway as 50-table MySQL 8.4 DDL; static validation PASS; safe MySQL execution not run.
+- **V0.4_JPA_PERSISTENCE_MODEL_STATIC_ACCEPTED** — 50 exact entity mappings are static accepted; runtime MySQL validation remains unverified.
+- **V0.4_REPOSITORY_FOUNDATION_STATIC_ACCEPTED** — 50 module-owned repositories and their query semantics are statically accepted; Flyway/MySQL, JPA/MySQL, and repository/MySQL runtime integration remain unverified because a safe test database is unavailable.
 - V0.3 acceptance does not close `OI-*` or approve physical schema; V0.4 Owner decisions (2026-08-18) have now resolved the business model blockers.
 - Remaining open OIs (`OI-001`, `OI-003`, `OI-004`, `OI-005`, `OI-015`) do not block V0.4 Database Design; they block external integration, production, seed, upload validation and preview implementation respectively.
 - Do not claim official organizational branding or final visual identity from V0.5 baseline acceptance; candidate/Pending assets remain controlled decisions.

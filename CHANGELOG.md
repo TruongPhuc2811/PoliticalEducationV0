@@ -1,5 +1,25 @@
 # CHANGELOG
 
+## 2026-08-19 — V0.4 Repository Foundation
+
+Applied:
+- Added 50 module-owned Spring Data JPA repository interfaces for the accepted physical entities.
+- Added only source-traceable, module-local foundational lookups for authentication/registration, organization assignment, Handbook listing, Quiz attempts/results, HCM today, Weekly current question, Competition canonical Quiz source, and Popular View identity.
+- Completed the custom-query semantics audit, including the accepted assignment-history half-open JPQL correction and Weekly one-authoritative-instant current-window contract.
+
+Status:
+- Repository Foundation: `Static Accepted / Runtime Unverified` (`V0.4_REPOSITORY_FOUNDATION_STATIC_ACCEPTED`).
+- No entity, enum, Flyway migration, service, API, frontend, or business-flow implementation was added.
+- Flyway/MySQL, JPA/MySQL, and repository/MySQL runtime integration remain unverified because no safe dedicated test database is available.
+
+Report:
+- `docs/reports/2026-08-19-V0.4-REPOSITORY-FOUNDATION-IMPLEMENTATION.md`
+- `docs/reports/2026-08-19-V0.4-REPOSITORY-FOUNDATION-SEMANTICS-AUDIT.md`
+- `docs/reports/2026-08-19-V0.4-REPOSITORY-FOUNDATION-WEEKLY-CONTRACT-PATCH.md`
+- `docs/reports/2026-08-19-V0.4-REPOSITORY-FOUNDATION-STATIC-APPROVAL.md`
+
+---
+
 ## 2026-08-19 — V0.4 JPA Persistence Model Static Approval
 
 Applied:
